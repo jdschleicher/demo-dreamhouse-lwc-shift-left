@@ -1,0 +1,11 @@
+{
+  "@context": "http://www.w3.org/ns/csvw",
+  "tables": [
+    {
+      "url": "Broker__c.csv"
+    },
+    {
+      "url": "Property__c.csv"
+    }
+  ]
+}
