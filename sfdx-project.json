@@ -2,15 +2,16 @@
   "packageDirectories": [
     {
       "path": "force-app",
-      "package": "ebikes-testing",
+      "package": "demo-dreamhouse-lwc",
       "versionNumber": "1.0.0.NEXT",
-      "default": true
+      "default": true,
+      "versionDescription": "Demo package for dreamhouse-lwc"
     }
   ],
   "sourceApiVersion": "57.0",
   "packageAliases": {
-    "ebikes-testing": "0HoOE000000000Q0AQ",
-    "ebikes-testing@1.0.0-46": "04tOE0000000RhOYAU",
-    "ebikes-testing@1.0.0-47": "04tOE0000000RhTYAU"
+    "demo-dreamhouse-lwc": "0HoOE000000000V0AQ",
+    "demo-dreamhouse-lwc@1.0.0-1": "04tOE0000000RhxYAE",
+    "demo-dreamhouse-lwc@1.0.0-2": "04tOE0000000Ri2YAE"
   }
 }

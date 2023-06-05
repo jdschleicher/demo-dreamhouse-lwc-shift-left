@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Commercial_Certified__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Flag to confirm whether Broker is certified in commercial buildings</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Flag to confirm whether Broker is certified in commercial buildings</inlineHelpText>
+    <label>Is Commercial Certified</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>
