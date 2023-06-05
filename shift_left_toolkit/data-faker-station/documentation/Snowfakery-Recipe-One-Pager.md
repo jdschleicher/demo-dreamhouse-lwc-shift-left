@@ -17,21 +17,26 @@ There is an example file within this repository that has an example fake snowfak
 
 ### Simple Snowfakery value Examples by Field Type
 
-        checkbox :             ${{ random_choice("true","false") }}
-        currency :             ${{ fake.pyfloat }}
-        date :                 ${{ fake.date }}
-        datetime :             ${{ fake.date }}
-        email :                ${{ fake.ascii_safe_email }}
-        number :               ${{ fake.pyint( min_value = -100000000000000, max_value = 100000000000000 ) }}
-        percent :              ${{ fake.pyint(min_value=0,max_value=100) }}
-        picklist :             ${{ random_choice("alpha","bravo","charlie","delta","foxtrot") }}
-        phone :                ${{ fake.phone_number }}
-        multiselectpicklist :  ${{ ";".join(( fake.random_sample( elements=("alpha","bravo","charlie","delta","echo","foxtrot" ) ) )) }}
-        text :                 ${{ fake.sentence }}
-        textarea :             ${{ fake.paragraph }}
-        time :                 ${{ fake.time }}
-        longtextarea :         ${{ fake.paragraph }}
-        url :                  ${{ fake.url }}
+    'checkbox' =             [PSCustomObject]@{ 'recipe'='${{ random_choice("true","false") }}' ; }
+    'currency' =             [PSCustomObject]@{ 'recipe'='${{ fake.pyfloat( right_digits = 2, positive=True, min_value=None, max_value=1000000) }}'; }
+    'date' =                 [PSCustomObject]@{ 'recipe'='${{ fake.date}}'; } 
+    'datetime' =             [PSCustomObject]@{ 'recipe'='${{ fake.date}}'; } 
+    'email' =                [PSCustomObject]@{ 'recipe'='${{ fake.ascii_safe_email}}'; }
+    'number' =               [PSCustomObject]@{ 'recipe'='${{ fake.pyint( min_value = -10000, max_value = 100000 ) }}'; }
+    'percent' =              [PSCustomObject]@{ 'recipe'='${{ fake.pyint( min_value = 0, max_value = 100) }}'; }
+    'picklist' =             [PSCustomObject]@{ 'recipe'='${{ random_choice("alpha","bravo","charlie","delta","foxtrot") }}'; }
+    'phone' =                [PSCustomObject]@{ 'recipe'='${{ fake.phone_number }}'; }
+    'multiselectpicklist' =  [PSCustomObject]@{ 'recipe'='${{ ";".join(( fake.random_sample( elements=("alpha","bravo","charlie","delta","echo","foxtrot" ) ) )) }}'; }
+    'text' =                 [PSCustomObject]@{ 'recipe'='${{ fake.text(max_nb_chars=20) }}'; }
+    'html' =                 [PSCustomObject]@{ 'recipe'='${{ fake.sentence }}'; }
+    'textarea' =             [PSCustomObject]@{ 'recipe'='${{ fake.paragraph }}'; }
+    'time' =                 [PSCustomObject]@{ 'recipe'='${{ fake.time }}'; }
+    'longtextarea' =         [PSCustomObject]@{ 'recipe'='${{ fake.paragraph }}'; }
+    'url' =                  [PSCustomObject]@{ 'recipe'='${{ fake.url }}'; }
+    'location' =             [PSCustomObject]@{ 'recipe'='##### SEE ONE PAGER FOR NECESSARY ADJUSTMENTS: https://github.com/jdschleicher/demo-dreamhouse-lwc-shift-left/blob/main/shift_left_toolkit/data-faker-station/documentation/Snowfakery-Recipe-One-Pager.md#:~:text=by%20Field%20Type-,Location%20Field,-A%20location%20type'; }
+    'lookup' =               [PSCustomObject]@{ 'recipe'='##### SEE ONE PAGER FOR NECESSARY ADJUSTMENTS: https://github.com/jdschleicher/demo-dreamhouse-lwc-shift-left/blob/main/shift_left_toolkit/data-faker-station/documentation/Snowfakery-Recipe-One-Pager.md#:~:text=fake%3A%20longitude-,Lookup%20Field,-In%20order%20to'; }
+    'encryptedtext' =        [PSCustomObject]@{ 'recipe'='${{ fake.credit_card_number }}'; }
+
 
         *** FOR WORKING WITH CHARACTER RESTRICTSIONS IN TEXT FIELDS ***
         text : ${{ fake.text(max_nb_chars=18) }}
