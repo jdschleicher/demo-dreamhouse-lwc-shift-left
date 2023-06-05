@@ -131,7 +131,7 @@ function apply_data_config {
     $path_project_directory_not_defined = [string]::IsNullOrWhiteSpace($path_project_directory)
     $path_project_directory_does_not_exist = -not (Test-Path $path_project_directory)
     if ($path_project_directory_not_defined -or $path_project_directory_does_not_exist) {
-        Write-Host '$PATH_PROJECT_DIRECTORY PROVIDED WAS NOT eBikes_LID - USING LOCAL DIRECTORY'
+        Write-Host '$PATH_PROJECT_DIRECTORY PROVIDED WAS NOT vaLID - USING LOCAL DIRECTORY'
         $path_project_directory = (Get-Location).path
     }
 
@@ -371,7 +371,7 @@ function get_sobject_api_name_by_file {
     $file_path = $data_file.Name
 
     if ( $file_path.IndexOf("-") -eq -1 -or $file_path.IndexOf(".json") -eq -1 ) {
-        Write-Error "INeBikes_LID FILE NAME AT: $($file_path.Name)"
+        Write-Error "INvaLID FILE NAME AT: $($file_path.Name)"
     }
     
     $sobject_name_from_file = $file_path.indexOf("-")
@@ -445,7 +445,7 @@ function get_object_describe_by_object {
            Write-Error "ERROR GETTING SOBJECT DESCRIBE DATA. THIS OBJECT MORE THAN LIKELY DOES NOT EXIST ON THE TARGET ORG: $sobject_api_name  : $_"
        }
 
-       Throw "GET SOBJECT RETRIEeBikes_L FAILED FOR $sobject_api_name"
+       Throw "GET SOBJECT RETRIEvaL FAILED FOR $sobject_api_name"
 
     }
 
@@ -484,11 +484,11 @@ function prepare_data_files_for_upsert {
         foreach ( $lookup in $lookup_fields ) {
 
             $lookup_field_api_name = $lookup.name
-            $lookup_field_eBikes_lue = $record.$lookup_field_api_name
-            if ( $null -ne $lookup_field_eBikes_lue) {
+            $lookup_field_value = $record.$lookup_field_api_name
+            if ( $null -ne $lookup_field_value) {
 
                 $expected_reference_trailing_text = "Ref"
-                if ( $lookup_field_eBikes_lue -like "*$expected_reference_trailing_text*") {
+                if ( $lookup_field_value -like "*$expected_reference_trailing_text*") {
                     $record.$lookup_field_api_name = $reference_id_to_associated_lookup_record_id_map[$record.$lookup_field_api_name]
                 }
                 
@@ -506,7 +506,7 @@ function prepare_data_files_for_upsert {
         $reference_id = $record.attributes.referenceId
         if ( $reference_id_to_associated_lookup_record_id_map.ContainsKey($reference_id) ) {
             ### DYNAMICALLY ADD EMPTY ID FIELD FOR UPSERTS
-            $record | Add-Member -NotePropertyName Id -NotePropertyeBikes_lue ""
+            $record | Add-Member -NotePropertyName Id -NotePropertyvalue ""
             $existing_record_id_from_previous_run = $reference_id_to_associated_lookup_record_id_map[$reference_id]
             $record.Id = $existing_record_id_from_previous_run 
         }
@@ -860,7 +860,7 @@ function update_reference_id_to_associated_record_id_map {
     )
 
     $record_index = 0
-    ### ENSURE RESULTS TYPE IS OF LIST; POWERSHELL AUTO CASTS WHEN PASSING LIST eBikes_RIABLES THAT HAVE ONLY 1 ITEM IN THE COLLECTION
+    ### ENSURE RESULTS TYPE IS OF LIST; POWERSHELL AUTO CASTS WHEN PASSING LIST vaRIABLES THAT HAVE ONLY 1 ITEM IN THE COLLECTION
     $upserted_records_results = [PSCustomObject[]]$upserted_records_results
     $prepared_data_for_capturing_index_to_reference_id = [PSCustomObject[]]$prepared_data_for_capturing_index_to_reference_id
     foreach ( $completed_data_upsert_result in $upserted_records_results ) {
@@ -913,7 +913,7 @@ function update_sobject_to_record_type_developer_name_to_id_map {
            Write-Error "ERROR CALLING SOQL FOR RECORD TYPE DETAIL ON SOBJECT $sobject_api_name : $_"
        }
 
-       Throw "RECORD TYPE RETRIEeBikes_L FAILED FOR $sobject_api_name"
+       Throw "RECORD TYPE RETRIEvaL FAILED FOR $sobject_api_name"
 
     }
 

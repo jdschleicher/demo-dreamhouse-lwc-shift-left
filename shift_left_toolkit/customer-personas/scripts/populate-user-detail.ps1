@@ -3,7 +3,7 @@ if ($env:STOP_SCRIPT -eq $true) { Write-Error -Message 'CHECK .GITHUB-WORKFLOW-T
 $path_to_project_directory = (Get-Location).path
 Import-Module -Force "$path_to_project_directory/shift_left_toolkit/customer-personas/scripts/user-persona-automation.psm1"
 Import-Module -Force "$path_to_project_directory/shift_left_toolkit/customer-personas/scripts/0-process-user-persona-json.psm1"
-Import-Module -Force "$path_to_project_directory/shift_left_toolkit/customer-personas/scripts/1-deactieBikes_te-existing-users.psm1"
+Import-Module -Force "$path_to_project_directory/shift_left_toolkit/customer-personas/scripts/1-deactivate-existing-users.psm1"
 
 $stopwatch =  [system.diagnostics.stopwatch]::StartNew()
 
@@ -11,7 +11,7 @@ $names_of_current_directory_child_items = Get-ChildItem | foreach name
 $current_directory_contains_shift_left_toolkit_directory = $names_of_current_directory_child_items -contains 'shift_left_toolkit'
 
 if ($current_directory_contains_shift_left_toolkit_directory) {
-    . shift_left_toolkit/customer-personas/environment-eBikes_riables-setup/initialize-environment-eBikes_riables.ps1
+    . shift_left_toolkit/customer-personas/environment-variables-setup/initialize-environment-variables.ps1
  
     [array]$user_personas = get_user_names_from_populate_user_detailjson -path_to_project_directory $path_to_project_directory  
     [array]$usernames_from_populate_user_detail = $user_personas | foreach username
@@ -97,10 +97,10 @@ if ($current_directory_contains_shift_left_toolkit_directory) {
 
     $groups_and_queues_records = get_groups_and_queues_from_user_ids $user_ids
     $map_username_to_user_persona_info  = update_map_username_to_user_persona_info_with_groups_and_queues_records $map_username_to_user_persona_info $groups_and_queues_records 
-    write_user_personas_to_populate_user_detail_file -user_personas $map_username_to_user_persona_info.eBikes_lues -path_to_project_directory $path_to_project_directory | Out-Null
+    write_user_personas_to_populate_user_detail_file -user_personas $map_username_to_user_persona_info.values -path_to_project_directory $path_to_project_directory | Out-Null
 
 } else {
-    Write-Error -Message "ERROR: THIS SCRIPT MUST RUN FROM eBikes_-salesforce-dojo DIRECTORY CONTAINING shift_left_toolkit DIRECTORY" -ErrorAction Stop
+    Write-Error -Message "ERROR: THIS SCRIPT MUST RUN FROM va-salesforce-dojo DIRECTORY CONTAINING shift_left_toolkit DIRECTORY" -ErrorAction Stop
 }
 
 $elapsed_seconds = $stopwatch.ElapsedMilliseconds/1000

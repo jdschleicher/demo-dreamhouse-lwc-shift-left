@@ -16,12 +16,12 @@ function get_static_directory_paths {
 
 $static_salesforce_field_to_fake_recipe_map = @{
     'checkbox' =             [PSCustomObject]@{ 'recipe'='${{ random_choice("true","false") }}' ; }
-    'currency' =             [PSCustomObject]@{ 'recipe'='${{ fake.pyfloat( right_digits = 2, positive=True, min_eBikes_lue=None, max_eBikes_lue=1000000) }}'; }
+    'currency' =             [PSCustomObject]@{ 'recipe'='${{ fake.pyfloat( right_digits = 2, positive=True, min_value=None, max_value=1000000) }}'; }
     'date' =                 [PSCustomObject]@{ 'recipe'='${{ fake.date}}'; } 
     'datetime' =             [PSCustomObject]@{ 'recipe'='${{ fake.date}}'; } 
     'email' =                [PSCustomObject]@{ 'recipe'='${{ fake.ascii_safe_email}}'; }
-    'number' =               [PSCustomObject]@{ 'recipe'='${{ fake.pyint( min_eBikes_lue = -10000, max_eBikes_lue = 100000 ) }}'; }
-    'percent' =              [PSCustomObject]@{ 'recipe'='${{ fake.pyint( min_eBikes_lue = 0, max_eBikes_lue = 100) }}'; }
+    'number' =               [PSCustomObject]@{ 'recipe'='${{ fake.pyint( min_value = -10000, max_value = 100000 ) }}'; }
+    'percent' =              [PSCustomObject]@{ 'recipe'='${{ fake.pyint( min_value = 0, max_value = 100) }}'; }
     'picklist' =             [PSCustomObject]@{ 'recipe'='${{ random_choice("alpha","bravo","charlie","delta","foxtrot") }}'; }
     'phone' =                [PSCustomObject]@{ 'recipe'='${{ fake.phone_number }}'; }
     'multiselectpicklist' =  [PSCustomObject]@{ 'recipe'='${{ ";".join(( fake.random_sample( elements=("alpha","bravo","charlie","delta","echo","foxtrot" ) ) )) }}'; }
@@ -31,8 +31,8 @@ $static_salesforce_field_to_fake_recipe_map = @{
     'time' =                 [PSCustomObject]@{ 'recipe'='${{ fake.time }}'; }
     'longtextarea' =         [PSCustomObject]@{ 'recipe'='${{ fake.paragraph }}'; }
     'url' =                  [PSCustomObject]@{ 'recipe'='${{ fake.url }}'; }
-    'location' =             [PSCustomObject]@{ 'recipe'='##### SEE ONE PAGER FOR NECESSARY ADJUSTMENTS: https://github.com/department-of-veterans-affairs/eBikes_-salesforce-dojo/wiki/Snowfakery-Recipe-One-Pager#:~:text=by%20Field%20Type-,Location%20Field,-A%20location%20type '; }
-    'lookup' =               [PSCustomObject]@{ 'recipe'='##### SEE ONE PAGER FOR NECESSARY ADJUSTMENTS: https://github.com/department-of-veterans-affairs/eBikes_-salesforce-dojo/wiki/Snowfakery-Recipe-One-Pager#:~:text=fake%3A%20longitude-,Lookup%20Field,-In%20order%20to '; }
+    'location' =             [PSCustomObject]@{ 'recipe'='##### SEE ONE PAGER FOR NECESSARY ADJUSTMENTS: https://github.com/department-of-veterans-affairs/va-salesforce-dojo/wiki/Snowfakery-Recipe-One-Pager#:~:text=by%20Field%20Type-,Location%20Field,-A%20location%20type '; }
+    'lookup' =               [PSCustomObject]@{ 'recipe'='##### SEE ONE PAGER FOR NECESSARY ADJUSTMENTS: https://github.com/department-of-veterans-affairs/va-salesforce-dojo/wiki/Snowfakery-Recipe-One-Pager#:~:text=fake%3A%20longitude-,Lookup%20Field,-In%20order%20to '; }
     'encryptedtext' =        [PSCustomObject]@{ 'recipe'='${{ fake.credit_card_number }}'; }
 }
 
@@ -41,7 +41,7 @@ function generate_snowfakery_recipe_from_repository {
         $timestamped_recipe_generation_directory
     )
 
-    $salesforce_objects_directory_path = get_objects_directory_path_if_codebase_and_config_eBikes_lid_for_recipe_generation
+    $salesforce_objects_directory_path = get_objects_directory_path_if_codebase_and_config_valid_for_recipe_generation
     if ( $null -ne $salesforce_objects_directory_path )  {
 
         $object_api_name_to_recipe_generation_details = create_object_api_name_to_recipe_generation_map -salesforce_objects_directory_path $salesforce_objects_directory_path
@@ -112,7 +112,7 @@ function create_recordtype_api_name_to_field_recipe_detail_map {
 
         $record_type_xml_detail = extract_salesforce_recordtype_xml_details -salesforce_record_type_file $record_type_file
         
-        if ( $record_type_xml_detail.picklisteBikes_lues.count -gt 0 ) {
+        if ( $record_type_xml_detail.picklistvalues.count -gt 0 ) {
 
             $record_type_recipe = build_record_type_to_record_type_field_modifications -record_type_xml_detail $record_type_xml_detail
             
@@ -134,17 +134,17 @@ function build_record_type_to_record_type_field_modifications {
     $recordtype_recipe = [RecordTypeRecipe]::new()
     $recordtype_recipe.RecordTypeApiName = $record_type_xml_detail.fullName
 
-    foreach ( $modification_field_detail in $record_type_xml_detail.picklisteBikes_lues) {
+    foreach ( $modification_field_detail in $record_type_xml_detail.picklistvalues) {
 
         $impacted_recordtype_field = [RecordTypeImpactedField]::new()
         $impacted_recordtype_field.FieldApiName = $modification_field_detail.picklist
 
-        $picklist_eBikes_lues = [system.collections.generic.list[string]]::new()
-        foreach ( $aeBikes_ilable_eBikes_lue in $modification_field_detail.eBikes_lues ) {
-            $picklist_eBikes_lues.Add($aeBikes_ilable_eBikes_lue.fullName)
+        $picklist_values = [system.collections.generic.list[string]]::new()
+        foreach ( $available_value in $modification_field_detail.values ) {
+            $picklist_values.Add($available_value.fullName)
         }
 
-        $impacted_recordtype_field.PicklisteBikes_lues = $picklist_eBikes_lues
+        $impacted_recordtype_field.Picklistvalues = $picklist_values
         $field_to_record_type_driven_field_details.Add($impacted_recordtype_field.FieldApiName, $impacted_recordtype_field)
 
     }
@@ -153,7 +153,7 @@ function build_record_type_to_record_type_field_modifications {
 
 }
 
-function get_objects_directory_path_if_codebase_and_config_eBikes_lid_for_recipe_generation {
+function get_objects_directory_path_if_codebase_and_config_valid_for_recipe_generation {
 
     $static_directory_paths = get_static_directory_paths
 
@@ -194,7 +194,7 @@ function get_objects_directory_path_if_codebase_and_config_eBikes_lid_for_recipe
         Write-Error -Message "ERROR: OBJECTS DIRECTORY DOES NOT EXIST: '$path_to_objects_folder'" -ErrorAction Stop
     } 
 
-    ### RETURN OBJECTS FOLDER PATH IF SETUP CORRECTLY AND config-data-seeding.json HAS eBikes_LID SETUP AND REQUIRED eBikes_LUES
+    ### RETURN OBJECTS FOLDER PATH IF SETUP CORRECTLY AND config-data-seeding.json HAS vaLID SETUP AND REQUIRED vaLUES
     $path_to_objects_folder
 }
 
@@ -418,7 +418,7 @@ function  update_child_relationship_breakdown_by_child_relationship_detail {
             ADDED TO A RECIPE SO THAT 3 DIFFERENT OBJECTS CAN HAVE 3 DIFFERENT NICK NAMES FOR THE 3 FIELDS REFERENCING THE SAME OBJECT BUT DIFFERENT USERS
         #>
         $total_times_referenced_property = "total_times_referenced_by_this_object"
-        $max_times_referenced_by_single_object = $children_relationships_breakdown.ChildRelationshipsBreakdown.eBikes_lues | Sort-Object -Property $total_times_referenced_property -Descending | Select-Object -First 1 -ExpandProperty $total_times_referenced_property
+        $max_times_referenced_by_single_object = $children_relationships_breakdown.ChildRelationshipsBreakdown.values | Sort-Object -Property $total_times_referenced_property -Descending | Select-Object -First 1 -ExpandProperty $total_times_referenced_property
         $object_api_to_relationship_breakdown_map[$parent_api_of_current_object].MaxAmountofReferencesFromSingleChildObject = $max_times_referenced_by_single_object
 
     } else {
@@ -521,10 +521,10 @@ function get_recipes_field_markup_by_node {
        
         $attention_to_reference_comment = $null
         if ( $recipe.IsLookup ) {
-            $attention_to_reference_comment = "### TODO: THIS NICKNAME MUST MATCH UNIQUE 'NICKNAME' INDEX eBikes_LUE OF THE EXPECTED LOOKUP OBJECT ABOVE"
+            $attention_to_reference_comment = "### TODO: THIS NICKNAME MUST MATCH UNIQUE 'NICKNAME' INDEX vaLUE OF THE EXPECTED LOOKUP OBJECT ABOVE"
         }
         $recipe_here_string = @"
-$($field_indent)$($recipe.ApiName): $($recipe.RecipeeBikes_lue)   $attention_to_reference_comment
+$($field_indent)$($recipe.ApiName): $($recipe.Recipevalue)   $attention_to_reference_comment
 "@
 
         <#
@@ -563,7 +563,7 @@ function build_recipes {
             $recipe_fields = get_recipes_field_markup_by_node -recipe_tree_node $recipe_tree_node
 
             if ( $null -eq $recipe_fields ) {
-                $recipe_fields = "### TODO: ATTENTION NEEDED HERE FOR NON-INCLUDED FIELD RECIPE eBikes_LUES  ###"
+                $recipe_fields = "### TODO: ATTENTION NEEDED HERE FOR NON-INCLUDED FIELD RECIPE vaLUES  ###"
             }
          
             $CHILD_DEPENDENTS_TODO_MESSAGE = $null
@@ -712,7 +712,7 @@ function get_field_recipes_by_fields_directory_path {
 
         $field_recipe_detail = extract_salesforce_field_details -salesforce_field_file $field_file -
 
-        ### DO NOT POPULATE AUTO-eBikes_LUED FORMULA FIELDS IN RECIPE
+        ### DO NOT POPULATE AUTO-vaLUED FORMULA FIELDS IN RECIPE
         if ( -not($field_recipe_detail.IsFormulaField) ) {
 
             $field_recipes.Add($field_recipe_detail) | Out-Null
@@ -731,7 +731,7 @@ function get_salesforce_record_type_field_detail_from_record_type_xml {
         <# $field_recipe_detail = [PSCustomObject]@{
              "full_api_name"         = $salesforce_field_xml_detail.'fullName'
              "type"                  = $salesforce_field_type.ToLower();
-             "recipe_eBikes_lue"          = "${{ fake.pyfloat }}"
+             "recipe_value"          = "${{ fake.pyfloat }}"
              "reference_type_detail" = @{
                   "reference_type_field_api_name" = PSCustom{
                        'reference_api_name = 'User'
@@ -745,40 +745,40 @@ function get_salesforce_record_type_field_detail_from_record_type_xml {
     $field_detail = [PSCustomObject]@{
         "full_api_name"         = $salesforce_field_xml_detail.'fullName';
         "type"                  = $salesforce_field_type.ToLower();
-        "recipe_eBikes_lue"          = $null;
+        "recipe_value"          = $null;
         "reference_type_detail" = @{};
         "is_formula_field"      = $false
 
     }
 
-    $recipe_eBikes_lue = $null
+    $recipe_value = $null
     ### ENSURE PICKLIST FIELD IS NOT DEPENDENT PICKLIST 
-    if ( $salesforce_field_type -eq "picklist" -and ($null -eq $salesforce_field_xml_detail.eBikes_lueSet.controllingField) ) {
+    if ( $salesforce_field_type -eq "picklist" -and ($null -eq $salesforce_field_xml_detail.valueSet.controllingField) ) {
 
-        $recipe_eBikes_lue = get_picklist_recipe_eBikes_lues_from_xml -picklist_xml_detail $salesforce_field_xml_detail
+        $recipe_value = get_picklist_recipe_values_from_xml -picklist_xml_detail $salesforce_field_xml_detail
     
     } elseif ( $salesforce_field_type -eq "lookup" -or $salesforce_field_type -eq "masterdetail" ) {
 
         $reference_type_detail = get_reference_type_detail -reference_field_xml_detail $salesforce_field_xml_detail -field_type $salesforce_field_type
         $field_detail.reference_type_detail.Add($field_detail.full_api_name, $reference_type_detail) | Out-Null
-        $recipe_eBikes_lue = get_special_reference_recipe_eBikes_lue_from_xml -reference_field_xml_detail $salesforce_field_xml_detail
+        $recipe_value = get_special_reference_recipe_value_from_xml -reference_field_xml_detail $salesforce_field_xml_detail
 
     } elseif ( $salesforce_field_xml_detail.PSobject.Properties.name -contains "formula" ) {
 
-        ### DO NOT POPULATE AUTO-eBikes_LUED FORMULA FIELDS IN RECIPE
+        ### DO NOT POPULATE AUTO-vaLUED FORMULA FIELDS IN RECIPE
         $field_detail.is_formula_field = $true
 
     } elseif ( $salesforce_field_type -eq "multiselectpicklist" ) {
 
-        $recipe_eBikes_lue = get_multiselect_picklist_recipe_eBikes_lues_from_xml -multiselect_picklist_xml_detail $salesforce_field_xml_detail
+        $recipe_value = get_multiselect_picklist_recipe_values_from_xml -multiselect_picklist_xml_detail $salesforce_field_xml_detail
 
-    } elseif ( $salesforce_field_type -eq "picklist" -and (-not($null -eq $salesforce_field_xml_detail.eBikes_lueSet.controllingField)) ) {
+    } elseif ( $salesforce_field_type -eq "picklist" -and (-not($null -eq $salesforce_field_xml_detail.valueSet.controllingField)) ) {
 
-        $recipe_eBikes_lue = get_dependent_picklist_recipe_eBikes_lue_from_xml -dependent_picklist_xml_detail $salesforce_field_xml_detail
+        $recipe_value = get_dependent_picklist_recipe_value_from_xml -dependent_picklist_xml_detail $salesforce_field_xml_detail
     
     }
 
-    $field_detail.recipe_eBikes_lue = $recipe_eBikes_lue
+    $field_detail.recipe_value = $recipe_value
     $field_detail
 
 }
@@ -790,45 +790,45 @@ function get_salesforce_field_recipe_from_xml_by_salesforce_type {
     $field_recipe.ApiName = $salesforce_field_xml_detail.'fullName'
     $field_recipe.Type = $salesforce_field_type.ToLower()
 
-    $recipe_eBikes_lue = $null
+    $recipe_value = $null
     ### ENSURE PICKLIST FIELD IS NOT DEPENDENT PICKLIST 
-    if ( $salesforce_field_type -eq "picklist" -and ($null -eq $salesforce_field_xml_detail.eBikes_lueSet.controllingField) ) {
+    if ( $salesforce_field_type -eq "picklist" -and ($null -eq $salesforce_field_xml_detail.valueSet.controllingField) ) {
 
-        $recipe_eBikes_lue = get_picklist_recipe_eBikes_lues_from_xml -picklist_xml_detail $salesforce_field_xml_detail
+        $recipe_value = get_picklist_recipe_values_from_xml -picklist_xml_detail $salesforce_field_xml_detail
     
     } elseif ( $salesforce_field_type -eq "lookup" -or $salesforce_field_type -eq "masterdetail" ) {
 
         $field_recipe.IsLookup = $true
         $field_recipe.LookupRecipe = get_lookup_recipe_by_reference_xml_detail -reference_field_xml_detail $salesforce_field_xml_detail -field_type $salesforce_field_type
-        $recipe_eBikes_lue = get_special_reference_recipe_eBikes_lue_from_xml -reference_field_xml_detail $salesforce_field_xml_detail
+        $recipe_value = get_special_reference_recipe_value_from_xml -reference_field_xml_detail $salesforce_field_xml_detail
 
     } elseif ( $salesforce_field_xml_detail.PSobject.Properties.name -contains "formula" ) {
 
-        ### DO NOT POPULATE AUTO-eBikes_LUED FORMULA FIELDS IN RECIPE
+        ### DO NOT POPULATE AUTO-vaLUED FORMULA FIELDS IN RECIPE
         $field_recipe.IsFormulaField = $true
 
     } elseif ( $salesforce_field_type -eq "multiselectpicklist" ) {
 
-        $recipe_eBikes_lue = get_multiselect_picklist_recipe_eBikes_lues_from_xml -multiselect_picklist_xml_detail $salesforce_field_xml_detail
+        $recipe_value = get_multiselect_picklist_recipe_values_from_xml -multiselect_picklist_xml_detail $salesforce_field_xml_detail
 
-    } elseif ( $salesforce_field_type -eq "picklist" -and (-not($null -eq $salesforce_field_xml_detail.eBikes_lueSet.controllingField)) ) {
+    } elseif ( $salesforce_field_type -eq "picklist" -and (-not($null -eq $salesforce_field_xml_detail.valueSet.controllingField)) ) {
 
-        $recipe_eBikes_lue = get_dependent_picklist_recipe_eBikes_lue_from_xml -dependent_picklist_xml_detail $salesforce_field_xml_detail
+        $recipe_value = get_dependent_picklist_recipe_value_from_xml -dependent_picklist_xml_detail $salesforce_field_xml_detail
     
     }
 
-    $field_recipe.RecipeeBikes_lue = $recipe_eBikes_lue
+    $field_recipe.Recipevalue = $recipe_value
     $field_recipe
 
 }
 
-function get_special_reference_recipe_eBikes_lue_from_xml {
+function get_special_reference_recipe_value_from_xml {
     param( $reference_field_xml_detail )
 
     $reference_api_name = "$($reference_field_xml_detail.referenceTo)"
-    $reference_type_recipe_eBikes_lue = "$($reference_api_name)Ref`${{ reference($($reference_api_name)_NickName)}}"
+    $reference_type_recipe_value = "$($reference_api_name)Ref`${{ reference($($reference_api_name)_NickName)}}"
     
-    $reference_type_recipe_eBikes_lue
+    $reference_type_recipe_value
 
 }
 
@@ -844,49 +844,49 @@ function get_lookup_recipe_by_reference_xml_detail {
 
 }
 
-function get_picklist_recipe_eBikes_lues_from_xml {
+function get_picklist_recipe_values_from_xml {
     param( $picklist_xml_detail )
 
-    ###  ".eBikes_lueSet.eBikes_lueSetDefinition.eBikes_lue" IS THE EXPECTED PROPERTY INVOCATION PATH 
-    ### THAT LEADS TO THE AeBikes_ILABLE PICKLIST eBikes_LUES 
-    $picklist_xml_node_all_eBikes_lues_location = $picklist_xml_detail.eBikes_lueSet.eBikes_lueSetDefinition.eBikes_lue
+    ###  ".valueSet.valueSetDefinition.value" IS THE EXPECTED PROPERTY INVOCATION PATH 
+    ### THAT LEADS TO THE AvaILABLE PICKLIST vaLUES 
+    $picklist_xml_node_all_values_location = $picklist_xml_detail.valueSet.valueSetDefinition.value
     
 
     # ${{ random_choice("alpha","bravo","charlie","delta","foxtrot") }}';
-    $all_picklist_eBikes_lue_api_names = $picklist_xml_node_all_eBikes_lues_location | Select-Object -ExpandProperty fullName
-    $quoted_api_names = $all_picklist_eBikes_lue_api_names -join '","'
-    $recipe_eBikes_lue = @" 
+    $all_picklist_value_api_names = $picklist_xml_node_all_values_location | Select-Object -ExpandProperty fullName
+    $quoted_api_names = $all_picklist_value_api_names -join '","'
+    $recipe_value = @" 
 `${{ random_choice("$quoted_api_names") }}
 "@
 
-    $recipe_eBikes_lue
+    $recipe_value
 
 }
 
-function get_multiselect_picklist_recipe_eBikes_lues_from_xml {
+function get_multiselect_picklist_recipe_values_from_xml {
     param( $multiselect_picklist_xml_detail )
 
     <# EXPECTED FAKE SYNTAX FOR MULTISELECT
         # picklistmultiselect1__c: ${{ ';'.join(( fake.random_sample( elements=('alpha','bravo','charlie','delta','echo','foxtrot') ) )) }}
     #>
 
-    ###  ".eBikes_lueSet.eBikes_lueSetDefinition.eBikes_lue" IS THE EXPECTED PROPERTY INVOCATION PATH 
-    ### THAT LEADS TO THE AeBikes_ILABLE PICKLIST eBikes_LUES 
-    $multiselect_picklist_xml_node_all_eBikes_lues_location = $multiselect_picklist_xml_detail.eBikes_lueSet.eBikes_lueSetDefinition.eBikes_lue
+    ###  ".valueSet.valueSetDefinition.value" IS THE EXPECTED PROPERTY INVOCATION PATH 
+    ### THAT LEADS TO THE AvaILABLE PICKLIST vaLUES 
+    $multiselect_picklist_xml_node_all_values_location = $multiselect_picklist_xml_detail.valueSet.valueSetDefinition.value
     
 
-    $all_multiselect_picklist_eBikes_lue_api_names = $multiselect_picklist_xml_node_all_eBikes_lues_location | Select-Object -ExpandProperty fullName
-    $quoted_api_names = $all_multiselect_picklist_eBikes_lue_api_names -join "','"
+    $all_multiselect_picklist_value_api_names = $multiselect_picklist_xml_node_all_values_location | Select-Object -ExpandProperty fullName
+    $quoted_api_names = $all_multiselect_picklist_value_api_names -join "','"
 
-    $recipe_eBikes_lue = @" 
+    $recipe_value = @" 
 `${{ ';'.join(( fake.random_sample( elements=('$quoted_api_names') ) )) }}
 "@
 
-    $recipe_eBikes_lue
+    $recipe_value
 
 }
 
-function get_dependent_picklist_recipe_eBikes_lue_from_xml {
+function get_dependent_picklist_recipe_value_from_xml {
     param( $dependent_picklist_xml_detail )
 
     <# EXPECTED FAKE SYNTAX FOR MULTISELECT
@@ -913,27 +913,27 @@ function get_dependent_picklist_recipe_eBikes_lue_from_xml {
                 - victor
     #>
 
-    ###  ".eBikes_lueSet.controllingField" IS THE EXPECTED CONTROLLING FIELD FOR THE PICKLIST     
-    $controlling_field = $dependent_picklist_xml_detail.eBikes_lueSet.controllingField
+    ###  ".valueSet.controllingField" IS THE EXPECTED CONTROLLING FIELD FOR THE PICKLIST     
+    $controlling_field = $dependent_picklist_xml_detail.valueSet.controllingField
 
-    $dependent_picklist_control_and_aeBikes_ilable_choices = @"
+    $dependent_picklist_control_and_available_choices = @"
 `n      if:
 "@
 
-    $controlling_field_to_picklist_options_map = get_controlling_field_to_options_map_by_depenedent_picklist_eBikes_lue_settings -dependent_picklist_eBikes_lue_settings $dependent_picklist_xml_detail.eBikes_lueSet.eBikes_lueSettings
+    $controlling_field_to_picklist_options_map = get_controlling_field_to_options_map_by_depenedent_picklist_value_settings -dependent_picklist_value_settings $dependent_picklist_xml_detail.valueSet.valueSettings
 
     foreach ( $controlling_picklist_key in $controlling_field_to_picklist_options_map.Keys ) {
 
         $dependent_picklist_options = $controlling_field_to_picklist_options_map[$controlling_picklist_key]
         
-        $aeBikes_ilable_choices_breakdown = @"
+        $available_choices_breakdown = @"
         - choice:
             when: `${{ $controlling_field == '$controlling_picklist_key' }}
             pick:
               random_choice:
 "@
 
-        $dependent_picklist_control_and_aeBikes_ilable_choices = $($dependent_picklist_control_and_aeBikes_ilable_choices , $aeBikes_ilable_choices_breakdown -join "`n")
+        $dependent_picklist_control_and_available_choices = $($dependent_picklist_control_and_available_choices , $available_choices_breakdown -join "`n")
 
         foreach ( $picklist_option in $dependent_picklist_options ) {
             
@@ -941,30 +941,30 @@ function get_dependent_picklist_recipe_eBikes_lue_from_xml {
                 - $picklist_option
 "@
 
-            $dependent_picklist_control_and_aeBikes_ilable_choices = $($dependent_picklist_control_and_aeBikes_ilable_choices , $picklist_option_here_string -join "`n")
+            $dependent_picklist_control_and_available_choices = $($dependent_picklist_control_and_available_choices , $picklist_option_here_string -join "`n")
 
         }
 
     }
 
 
-    $recipe_eBikes_lue = @" 
-$dependent_picklist_control_and_aeBikes_ilable_choices
+    $recipe_value = @" 
+$dependent_picklist_control_and_available_choices
 "@
 
-    $recipe_eBikes_lue
+    $recipe_value
 
 }
 
-function get_controlling_field_to_options_map_by_depenedent_picklist_eBikes_lue_settings {
-    param( $dependent_picklist_eBikes_lue_settings )
+function get_controlling_field_to_options_map_by_depenedent_picklist_value_settings {
+    param( $dependent_picklist_value_settings )
 
     $controlling_field_to_picklist_options = @{}
-    foreach ( $eBikes_lue_settings in $dependent_picklist_eBikes_lue_settings) {
+    foreach ( $value_settings in $dependent_picklist_value_settings) {
 
-        $dependent_picklist_option = $eBikes_lue_settings.eBikes_lueName
+        $dependent_picklist_option = $value_settings.valueName
 
-        foreach ( $picklist_controlling_field in $eBikes_lue_settings.controllingFieldeBikes_lue ) {
+        foreach ( $picklist_controlling_field in $value_settings.controllingFieldvalue ) {
 
             if ($controlling_field_to_picklist_options.ContainsKey($picklist_controlling_field)) {
         
@@ -1000,8 +1000,8 @@ function extract_salesforce_field_details {
             $salesforce_field_xml_detail = $xml_object.($xml_member.name);
             $field_recipe = get_salesforce_field_recipe_from_xml_by_salesforce_type -salesforce_field_type $salesforce_field_type -salesforce_field_xml_detail $salesforce_field_xml_detail
 
-            if ( [string]::IsNullOrEmpty($field_recipe.RecipeeBikes_lue) ) {
-                $field_recipe.RecipeeBikes_lue = $static_salesforce_field_to_fake_recipe_map[$field_recipe.Type].recipe
+            if ( [string]::IsNullOrEmpty($field_recipe.Recipevalue) ) {
+                $field_recipe.Recipevalue = $static_salesforce_field_to_fake_recipe_map[$field_recipe.Type].recipe
             }
             $field_recipe  
             break
@@ -1061,7 +1061,7 @@ class RecordTypeRecipe {
 class RecordTypeImpactedField {
 
     [string] $FieldApiName
-    [string[]] $PicklisteBikes_lues   
+    [string[]] $Picklistvalues   
 
 }
 
@@ -1069,7 +1069,7 @@ class FieldRecipe {
 
     [string] $ApiName
     [string] $Type
-    [string] $RecipeeBikes_lue
+    [string] $Recipevalue
     [System.Boolean] $IsLookup
     [LookupRecipe] $LookupRecipe
     [System.Boolean] $IsFormulaField

@@ -34,7 +34,7 @@ As long as object metadata exists and is in source format in our local project t
 
    1. Make sure all necessary software is installed on your machine: [Software Install and Pre-Steps](https://github.com/department-of-veterans-affairs/dtc-release-cicd-local/wiki/PREREQUISITES-AND-SETUP-TO-RUN-DATA-FAKER-STATION-FUNCTIONALITY)
    1. Ensure the **[cicd_local](https://github.com/department-of-veterans-affairs/dtc-release-cicd-local/tree/master/cicd_local)** directory from this repository is copied into the project we are working out of. 
-   1. Ensure the **cicd_local/data-faker-station/config-data-seeding.json** file has the correct path for the eBikes_lue of the **path_to_objects_directory** json parameter. The structure we should be expecting as part of a eBikes_ project is "sfdx-source/name-of-package/objects". In a generated standard salesforce project generated with the Salesforce Extension Pack, the "path_to_objects_directory" eBikes_lue may be "force-app/default/main/objects". An example of what the "config-data-seeding.json" is below:
+   1. Ensure the **cicd_local/data-faker-station/config-data-seeding.json** file has the correct path for the value of the **path_to_objects_directory** json parameter. The structure we should be expecting as part of a va project is "sfdx-source/name-of-package/objects". In a generated standard salesforce project generated with the Salesforce Extension Pack, the "path_to_objects_directory" value may be "force-app/default/main/objects". An example of what the "config-data-seeding.json" is below:
 ```yaml
     {
        "path_to_recipes": "recipes",

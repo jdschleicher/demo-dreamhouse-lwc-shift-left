@@ -15,15 +15,15 @@ In order for the snowfakery recipe to work as expected it must be in the correct
 
 There is an example file within this repository that has an example fake snowfakery use case for each Salesforce field type: [SeededRecord__c](https://github.com/department-of-veterans-affairs/dtc-release-cicd-local/blob/master/cicd_local/data-faker-station/recipes/SeededRecord__c.RecordType_One.yml)
 
-### Simple Snowfakery eBikes_lue Examples by Field Type
+### Simple Snowfakery value Examples by Field Type
 
         checkbox :             ${{ random_choice("true","false") }}
         currency :             ${{ fake.pyfloat }}
         date :                 ${{ fake.date }}
         datetime :             ${{ fake.date }}
         email :                ${{ fake.ascii_safe_email }}
-        number :               ${{ fake.pyint( min_eBikes_lue = -100000000000000, max_eBikes_lue = 100000000000000 ) }}
-        percent :              ${{ fake.pyint(min_eBikes_lue=0,max_eBikes_lue=100) }}
+        number :               ${{ fake.pyint( min_value = -100000000000000, max_value = 100000000000000 ) }}
+        percent :              ${{ fake.pyint(min_value=0,max_value=100) }}
         picklist :             ${{ random_choice("alpha","bravo","charlie","delta","foxtrot") }}
         phone :                ${{ fake.phone_number }}
         multiselectpicklist :  ${{ ";".join(( fake.random_sample( elements=("alpha","bravo","charlie","delta","echo","foxtrot" ) ) )) }}
@@ -42,13 +42,13 @@ There is an example file within this repository that has an example fake snowfak
 
 ***
 
-### Complex Snowfakery eBikes_lue Examples by Field Type
+### Complex Snowfakery value Examples by Field Type
 ***
                     
 **Location Field**
 ```YAML
 
-A location type field will require a latitude and longitude eBikes_lue as it is a:
+A location type field will require a latitude and longitude value as it is a:
  "Compound Field" - https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/compound_fields_geolocation.htm. 
 To satisfy this compound field syntax within a snowfakery recipe we will provide a latitude and longitude. 
 For example, if the field's api name was "geolocation__c"
@@ -96,7 +96,7 @@ for the initial SeededRecord object with the nickname "SeededRecordParent1"
 **Dependent Picklist**
 ```YAML
 
-By referencing an existing picklist option and associated eBikes_lues we can setup our recipe eBikes_lue for a dependent 
+By referencing an existing picklist option and associated values we can setup our recipe value for a dependent 
 picklist like below (parent picklist included in example):
 
      picklist1__c:

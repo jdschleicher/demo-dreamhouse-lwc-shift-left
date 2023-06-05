@@ -88,7 +88,7 @@ function write_user_personas_to_user_detail_file {
     $user_personas_json = $user_personas_json.Replace("\u0026", "&") 
     Write-Host "write_user_personas_to_user_detail_file: writing `$user_personas_json to file:"
     Write-Host $user_personas_json
-    Set-Content -Path $path_to_user_detail_json -eBikes_lue $user_personas_json 
+    Set-Content -Path $path_to_user_detail_json -value $user_personas_json 
 }
 
 function write_user_personas_to_populate_user_detail_file {
@@ -105,7 +105,7 @@ function write_user_personas_to_populate_user_detail_file {
     $user_personas_json = $user_personas_json.Replace("\u0026", "&") 
     Write-Host "write_user_personas_to_user_detail_file: writing `$user_personas_json to file:"
     Write-Host $user_personas_json
-    Set-Content -Path $path_to_populate_user_detail_json -eBikes_lue $user_personas_json 
+    Set-Content -Path $path_to_populate_user_detail_json -value $user_personas_json 
 }
 
 function reset_user_persona_usernames {
@@ -163,7 +163,7 @@ function add_profile_to_profiles {
     $profile_names
 }
 
-function setup_org_environment_eBikes_riables {
+function setup_org_environment_variables {
     param($scratch_org_environment_alias)
 
     $org_information_json = sfdx force:org:display -u $scratch_org_environment_alias --verbose --json
@@ -178,36 +178,36 @@ function setup_org_environment_eBikes_riables {
     }         
 }
 
-function VERIFY_THAT_EXPECTED_ENVIRONMENT_eBikes_RIABLES_EXIST {
-    param($environment_eBikes_riable_names)
+function VERIFY_THAT_EXPECTED_ENVIRONMENT_vaRIABLES_EXIST {
+    param($environment_variable_names)
 
-    $NUMBER_OF_EXPECTED_ENVIRONMENT_eBikes_RIABLES = $environment_eBikes_riable_names.count
-    $EXPECTED_ENVIRONMENT_eBikes_RIABLES_STRING = ($environment_eBikes_riable_names | foreach { "`$env:$($_.ToUpper())" }) -join "`n"
-    Write-Host -Message "I EXPECT THE FOLLOWING $NUMBER_OF_EXPECTED_ENVIRONMENT_eBikes_RIABLES ENVIRONMENT eBikes_RIABLES TO BE NON-NULL AND NON-EMPTY:`n$EXPECTED_ENVIRONMENT_eBikes_RIABLES_STRING`n" -ErrorAction Stop
+    $NUMBER_OF_EXPECTED_ENVIRONMENT_vaRIABLES = $environment_variable_names.count
+    $EXPECTED_ENVIRONMENT_vaRIABLES_STRING = ($environment_variable_names | foreach { "`$env:$($_.ToUpper())" }) -join "`n"
+    Write-Host -Message "I EXPECT THE FOLLOWING $NUMBER_OF_EXPECTED_ENVIRONMENT_vaRIABLES ENVIRONMENT vaRIABLES TO BE NON-NULL AND NON-EMPTY:`n$EXPECTED_ENVIRONMENT_vaRIABLES_STRING`n" -ErrorAction Stop
 
-    $missing_environment_eBikes_riables = [system.collections.generic.list[string]]::new()
-    $found_environment_eBikes_riables =  [system.collections.generic.list[string]]::new()
+    $missing_environment_variables = [system.collections.generic.list[string]]::new()
+    $found_environment_variables =  [system.collections.generic.list[string]]::new()
 
-    foreach ($environment_eBikes_riable_name in $environment_eBikes_riable_names) {
-        $environment_eBikes_riable_eBikes_lue_is_null_or_empty = Invoke-Expression "[string]::IsNullOrEmpty((`$env:$environment_eBikes_riable_name))"
-        if ( $environment_eBikes_riable_eBikes_lue_is_null_or_empty ) {
-            $missing_environment_eBikes_riables.Add($environment_eBikes_riable_name) | Out-Null
+    foreach ($environment_variable_name in $environment_variable_names) {
+        $environment_variable_value_is_null_or_empty = Invoke-Expression "[string]::IsNullOrEmpty((`$env:$environment_variable_name))"
+        if ( $environment_variable_value_is_null_or_empty ) {
+            $missing_environment_variables.Add($environment_variable_name) | Out-Null
         }
         else {
-            $found_environment_eBikes_riables.Add($environment_eBikes_riable_name) | Out-Null
+            $found_environment_variables.Add($environment_variable_name) | Out-Null
         }
     }
 
-    if ($missing_environment_eBikes_riables.count -eq 0) {
-        foreach ($found_environment_eBikes_riable in $found_environment_eBikes_riables) {
-            $FOUND_ENVIRONMENT_eBikes_RIABLE_UPPER_CASE = $found_environment_eBikes_riable.ToUpper()
-            Write-Host -Message "SUCCESS: VERIFIED THAT `$ENV:$FOUND_ENVIRONMENT_eBikes_RIABLE_UPPER_CASE IS NOT NULL OR EMPTY"
+    if ($missing_environment_variables.count -eq 0) {
+        foreach ($found_environment_variable in $found_environment_variables) {
+            $FOUND_ENVIRONMENT_vaRIABLE_UPPER_CASE = $found_environment_variable.ToUpper()
+            Write-Host -Message "SUCCESS: VERIFIED THAT `$ENV:$FOUND_ENVIRONMENT_vaRIABLE_UPPER_CASE IS NOT NULL OR EMPTY"
         }
     }
     else {
-        $NUMBER_OF_MISSING_ENVIRONMENT_eBikes_RIABLES = $missing_environment_eBikes_riables.count
-        $MISSING_ENVIRONMENT_eBikes_RIABLES_STRING = ($missing_environment_eBikes_riables | foreach { "`$env:$($_.ToUpper())" }) -join ', '
-        Write-Error -Message "TERMINATING SCRIPT DUE TO $NUMBER_OF_MISSING_ENVIRONMENT_eBikes_RIABLES NULL OR EMPTY ENVIRONMENT eBikes_RIABLES: $MISSING_ENVIRONMENT_eBikes_RIABLES_STRING" -ErrorAction Stop
+        $NUMBER_OF_MISSING_ENVIRONMENT_vaRIABLES = $missing_environment_variables.count
+        $MISSING_ENVIRONMENT_vaRIABLES_STRING = ($missing_environment_variables | foreach { "`$env:$($_.ToUpper())" }) -join ', '
+        Write-Error -Message "TERMINATING SCRIPT DUE TO $NUMBER_OF_MISSING_ENVIRONMENT_vaRIABLES NULL OR EMPTY ENVIRONMENT vaRIABLES: $MISSING_ENVIRONMENT_vaRIABLES_STRING" -ErrorAction Stop
     }
 
 }
@@ -306,7 +306,7 @@ function ConvertTo-Hashtable {
     [CmdletBinding()]
     [OutputType('hashtable')]
     param (
-        [Parameter(eBikes_lueFromPipeline)]
+        [Parameter(valueFromPipeline)]
         $InputObject
     )
 
@@ -333,7 +333,7 @@ function ConvertTo-Hashtable {
             ## Convert it to its own hash table and return it
             $hash = @{}
             foreach ($property in $InputObject.PSObject.Properties) {
-                $hash[$property.Name] = ConvertTo-Hashtable -InputObject $property.eBikes_lue
+                $hash[$property.Name] = ConvertTo-Hashtable -InputObject $property.value
             }
             $hash
         } else {
@@ -540,7 +540,7 @@ function get_org_name_from_instance_url {
     $instance_url_pattern = 'https://(.*).my.salesforce.com'
     $match_result = [regex]::match($instance_url, $instance_url_pattern)
     if ($match_result.success -and $match_result.groups.count -eq 2) {
-        $match_result.groups[1].eBikes_lue
+        $match_result.groups[1].value
     }
     else {
         Write-Error -Message "ERROR: INSTANCE URL '$instance_url' DID NOT MATCH EXPECTED PATTERN '$instance_url_pattern'" -ErrorAction Stop
@@ -563,7 +563,7 @@ function get_original_username_from_username_org_name_string {
     $org_name_pattern = '^(.*)\.___.*___'
     $match_result = [regex]::match($username, $org_name_pattern)
     if ($match_result.success -and $match_result.groups.count -eq 2) {
-        $match_result.groups[1].eBikes_lue
+        $match_result.groups[1].value
     }
     else {
         Write-Error -Message "ERROR: INSTANCE URL '$username' DID NOT MATCH EXPECTED PATTERN '$org_name_pattern'" -ErrorAction Stop
@@ -582,14 +582,14 @@ function foreach_list_function {
                                             
 function foreach_list_function_test {                                                                                                           
     $sample_list_single_element = @(                               
-        [PSCustomObject]@{ 'id' = 'abc1'; 'eBikes_lue' = 'a1' }
+        [PSCustomObject]@{ 'id' = 'abc1'; 'value' = 'a1' }
     )                                 
                                                 
     $sample_list_multiple_elements = @(
-        [PSCustomObject]@{ 'id' = 'abc1'; 'eBikes_lue' = 'a1' },
-        [PSCustomObject]@{ 'id' = 'abc2'; 'eBikes_lue' = 'a2' },
-        [PSCustomObject]@{ 'id' = 'abc3'; 'eBikes_lue' = 'a3' },
-        [PSCustomObject]@{ 'id' = 'abc4'; 'eBikes_lue' = 'a4' }
+        [PSCustomObject]@{ 'id' = 'abc1'; 'value' = 'a1' },
+        [PSCustomObject]@{ 'id' = 'abc2'; 'value' = 'a2' },
+        [PSCustomObject]@{ 'id' = 'abc3'; 'value' = 'a3' },
+        [PSCustomObject]@{ 'id' = 'abc4'; 'value' = 'a4' }
     )
 
     $list = foreach_list -list $sample_list_single_element -sb { param($v) $v.id }
@@ -605,7 +605,7 @@ function foreach_list
 {
     [CmdletBinding()]
     Param(
-        [Parameter(eBikes_lueFromPipeline)]
+        [Parameter(valueFromPipeline)]
         [PSCustomObject]$pipeline_object,
         [ScriptBlock]$process
     )
@@ -652,7 +652,7 @@ function get_default_org_target_info_from_sfdxconfigjson {
                 Write-Host -Message "SUCCESS: DEFAULT ORG ALIAS SETUP IN SFDX-CONFIG.JSON: $sfdx_org_alias"
                 $sfdx_org_alias
             } else {
-                Write-Error -Message "ERROR: NO DEFAULTUSERNAME eBikes_LUE IN THE FILE $PATH_TO_SFDX_CONFIG_JSON_UPPER_CASE" -ErrorAction Stop
+                Write-Error -Message "ERROR: NO DEFAULTUSERNAME vaLUE IN THE FILE $PATH_TO_SFDX_CONFIG_JSON_UPPER_CASE" -ErrorAction Stop
             }
         } else {
             Write-Error -Message "ERROR: FAILED TO PARSE $PATH_TO_SFDX_CONFIG_JSON_UPPER_CASE" -ErrorAction Stop

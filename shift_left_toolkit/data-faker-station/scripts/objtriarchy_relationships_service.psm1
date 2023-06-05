@@ -25,11 +25,11 @@ function build_objtriarch_to_recipe_family_tree_map_by_object_api_relationship_b
     $objtriarch_to_recipe_family_tree_map = @{}
 
     ### SORT BY OBJECT THAT HAS THE LEAST AMOUNT OF PARENT REFERENCES FIRST THEN BY THE MOST CHILD REFERENCES
-    $sorted_object_nodes = $object_api_to_relationship_breakdown_map.eBikes_lues | Sort-Object -Property  @{ Expression={ $_.TotalTimesReferenced  }; Descending=$false, @{ Expression={ $_.TotalParentObjectsIReference }; Descending=$false } } | Select-Object 
+    $sorted_object_nodes = $object_api_to_relationship_breakdown_map.values | Sort-Object -Property  @{ Expression={ $_.TotalTimesReferenced  }; Descending=$false, @{ Expression={ $_.TotalParentObjectsIReference }; Descending=$false } } | Select-Object 
     $object_api_to_tree_plot = [System.Collections.SortedList]::new()
     $leading_node_to_recipe_file_map = @{}
    
-    recursieBikes_te_object_relationships -objects $sorted_object_nodes `
+    recursivate_object_relationships -objects $sorted_object_nodes `
                                         -recipe_tree_map $object_api_to_tree_plot `
                                         -leading_node_to_recipe_file_map $leading_node_to_recipe_file_map `
                                         -object_api_to_relationship_breakdown_map $object_api_to_relationship_breakdown_map `
@@ -39,8 +39,8 @@ function build_objtriarch_to_recipe_family_tree_map_by_object_api_relationship_b
 
     $sorted_objectriarch_to_recipe_family_tree_map = [System.Collections.SortedList]::new()
     foreach ( $recipe_name_key in $objtriarch_to_recipe_family_tree_map.Keys ) {
-        $sorted_eBikes_lues = $objtriarch_to_recipe_family_tree_map[$recipe_name_key] | Sort-Object -Property Level
-        $sorted_objectriarch_to_recipe_family_tree_map.Add($recipe_name_key, $sorted_eBikes_lues ) | Out-Null
+        $sorted_values = $objtriarch_to_recipe_family_tree_map[$recipe_name_key] | Sort-Object -Property Level
+        $sorted_objectriarch_to_recipe_family_tree_map.Add($recipe_name_key, $sorted_values ) | Out-Null
     } 
     
     $sorted_objectriarch_to_recipe_family_tree_map | ConvertTo-Json -Depth 10 | Out-File "$timestamped_recipe_generation_directory/RECIPES_BY_HIGHEST_PARENT_OBTRIARCH_TREELATIONSHIP_$date_label.json" | Out-Null
@@ -60,16 +60,16 @@ function add_to_family_recipe_tree_map {
     <#
        
         LOGIC BELOW LOOKS AT ALL PARENT OBJECTS, CHILD OBJECTS, AND CURRENT ITERATING OBJECT API NODE
-        AND USES THOSE eBikes_LUES TO DETERMINE IF THERE IS AN EXISTING "RECIPE" FILE IN PROGRESS THAT EXISTS 
-        IN THE $leading_node_to_recipe_file_map THAT ALREADY HAS AN ASSOCIATED eBikes_LUE THAT MATCHES ANY OF THE API
+        AND USES THOSE vaLUES TO DETERMINE IF THERE IS AN EXISTING "RECIPE" FILE IN PROGRESS THAT EXISTS 
+        IN THE $leading_node_to_recipe_file_map THAT ALREADY HAS AN ASSOCIATED vaLUE THAT MATCHES ANY OF THE API
         NAMES FOUND IN THE CURRENT RUNNING OBJECT NODE'S CHILD OBJECT API'S, PARENT API'S, OR ITS OWN OBJECT API NAME AS WELL.
-        IF THERE ARE MATCHES DISCOVERED ALL THE PARENT, CHILD, AND CURRENT OBJECT APIS WILL BE ADDED AS ADDITIONAL eBikes_LUES TO THE 
+        IF THERE ARE MATCHES DISCOVERED ALL THE PARENT, CHILD, AND CURRENT OBJECT APIS WILL BE ADDED AS ADDITIONAL vaLUES TO THE 
         LIST ASSOCIATED WITH THAT KEY FROM $leading_node_to_recipe_file_map
 
         WE ARE ABLE TO COMPARE THE CURRENT NODE, PARENTS, AND CHILDREN AGAINST THE EXISTING $leading_node_to_recipe_file_map 
         BECAUSE OF THE RECURSIVE APPROACH TAKEN WHERE THE FIRST OBJECT NODE TO BE ITERATED OVER AND MADE A TREENODE IS THE OBJECT 
         SORTED BY MOST CHILD DEPENDENTS. THIS FIRST OBJECT WILL BE ADDED TO THE $leading_node_to_recipe_file_map AND IT'S ASSOCIATED
-        KEY eBikes_LUE WILL BE A LIST OF OBJECT API NAMES THAT THE CURRENT OBJECT NODE HAS LOOKUP REFERENCES TO AND CHILD OBJECTS THAT LOOK UP 
+        KEY vaLUE WILL BE A LIST OF OBJECT API NAMES THAT THE CURRENT OBJECT NODE HAS LOOKUP REFERENCES TO AND CHILD OBJECTS THAT LOOK UP 
         TO THE CURRENT OBJECT BEING ITERATED OVER
     
     #>
@@ -96,14 +96,14 @@ function add_to_family_recipe_tree_map {
 
         }
 
-        ### REMOVE ANY DUPLICATE REFERENCE eBikes_LUES FROM BLANKET ADDITION OF ALL PARENT AND CHILD OBJECT API REFERENCES
+        ### REMOVE ANY DUPLICATE REFERENCE vaLUES FROM BLANKET ADDITION OF ALL PARENT AND CHILD OBJECT API REFERENCES
         $leading_node_to_recipe_file_map[$leading_recipe_tree_object_api] =  [system.collections.generic.list[string]]($leading_node_to_recipe_file_map[$leading_recipe_tree_object_api] | Select-Object -Unique )
 
     } else {
 
         $leading_recipe_tree_object_api = $node_api
         $leading_node_to_recipe_file_map.Add($node_api, $all_related_objects ) | Out-Null
-        ### REMOVE ANY DUPLICATE REFERENCE eBikes_LUES FROM BLANKET ADDITION OF ALL PARENT AND CHILD OBJECT API REFERENCES
+        ### REMOVE ANY DUPLICATE REFERENCE vaLUES FROM BLANKET ADDITION OF ALL PARENT AND CHILD OBJECT API REFERENCES
         $leading_node_to_recipe_file_map[$node_api] =  [system.collections.generic.list[string]]($leading_node_to_recipe_file_map[$node_api] | Select-Object -Unique )
 
     }
@@ -203,7 +203,7 @@ function add_node_to_relationship_recipe_tree {
         SCENARIO #1:
         ===========================
 
-        When the object (node_api) being iterated on and is not yet an object-api found as a key eBikes_lue within "recipe_tree_map"
+        When the object (node_api) being iterated on and is not yet an object-api found as a key value within "recipe_tree_map"
         Then create a new node
     
     #>
@@ -335,7 +335,7 @@ function add_tree_node_to_recipe_family_tree {
 }
 
 
-function recursieBikes_te_object_relationships {
+function recursivate_object_relationships {
     param( 
         $objects, 
         $recipe_tree_map,
