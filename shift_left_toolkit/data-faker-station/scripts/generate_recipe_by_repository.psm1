@@ -521,7 +521,7 @@ function get_recipes_field_markup_by_node {
        
         $attention_to_reference_comment = $null
         if ( $recipe.IsLookup ) {
-            $attention_to_reference_comment = "### TODO: THIS NICKNAME MUST MATCH UNIQUE 'NICKNAME' INDEX vaLUE OF THE EXPECTED LOOKUP OBJECT ABOVE"
+            $attention_to_reference_comment = "### TODO: THIS NICKNAME MUST MATCH UNIQUE 'NICKNAME' INDEX VALUE OF THE EXPECTED LOOKUP OBJECT ABOVE"
         }
         $recipe_here_string = @"
 $($field_indent)$($recipe.ApiName): $($recipe.Recipevalue)   $attention_to_reference_comment
