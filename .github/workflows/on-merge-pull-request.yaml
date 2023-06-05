@@ -161,7 +161,6 @@ jobs:
           tag: ${{ steps.tag_version.outputs.new_tag }}
           name: Build ${{ steps.tag_version.outputs.new_tag }}
           body: ${{ steps.tag_version.outputs.changelog }}
-          artifacts: "release.tar.gz,foo/*.txt"
           bodyFile: "body.md"
   
   production-install:

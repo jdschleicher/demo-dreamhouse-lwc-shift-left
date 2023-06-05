@@ -488,35 +488,35 @@ function check_for_missing_records {
 
     foreach ($profilename in $all_profile_names) {
         $returned_profile_api_names = $profile_records | foreach Name
-        if ($returned_profile_api_names -notcontains $profilename) {
+        if ($returned_profile_api_names.count -gt 0 -and $returned_profile_api_names -notcontains $profilename) {
             $error_messages.Add("** ERROR: `$PROFILENAME '$profilename' WAS NOT FOUND IN '$($env:ORG_INSTANCE_URL)'") | Out-Null
         }
     }
 
     foreach ($permset_name in $all_permission_set_api_names) {
         $returned_permset_api_names = $permset_records | foreach Name
-        if ($returned_permset_api_names -notcontains $permset_name) {
+        if ($returned_permset_api_names.count -gt 0 -and $returned_permset_api_names -notcontains $permset_name) {
             $error_messages.Add("** ERROR: `$PERMSET_NAME '$permset_name' WAS NOT FOUND IN '$($env:ORG_INSTANCE_URL)'") | Out-Null
         }
     }
 
     foreach ($queue_name in $all_queue_api_names) {
         $returned_queue_api_names = $queue_records | foreach DeveloperName
-        if ($returned_queue_api_names -notcontains $queue_name) {
+        if ($returned_queue_api_names.count -gt 0 -and $returned_queue_api_names -notcontains $queue_name) {
             $error_messages.Add("** ERROR: `$QUEUE_NAME '$queue_name' WAS NOT FOUND IN '$($env:ORG_INSTANCE_URL)'") | Out-Null
         }
     }
 
     foreach ($group_name in $all_group_api_names) {
         $returned_group_api_names = $group_records | foreach DeveloperName
-        if ($returned_group_api_names -notcontains $group_name) {
+        if ($returned_group_api_names.count -gt 0 -and $returned_group_api_names -notcontains $group_name) {
             $error_messages.Add("** ERROR: `$GROUP_NAME '$group_name' WAS NOT FOUND IN '$($env:ORG_INSTANCE_URL)'") | Out-Null
         }
     }
 
     foreach ($role_api_name in $all_role_api_names) {
         $returned_role_api_name = $role_records | foreach DeveloperName
-        if ($returned_role_api_name -notcontains $role_api_name) {
+        if ($returned_role_api_name.count -gt 0 -and $returned_role_api_name -notcontains $role_api_name) {
             $error_messages.Add("** ERROR: `$GROUP_NAME '$role_api_name' WAS NOT FOUND IN '$($env:ORG_INSTANCE_URL)'") | Out-Null
         }
     }

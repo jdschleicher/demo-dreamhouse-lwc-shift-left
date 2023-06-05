@@ -18,11 +18,15 @@ function assign_user_queues {
 "@
             $queue_member_setup_lines.Add($queue_assignment) | Out-Null
         }
+
     }
 
-    $queue_member_apex_formatted =  $queue_member_setup_lines -join ",`n`n"
 
-    $queue_member_apex_instantiation_lines = @"
+    if ( $queue_member_setup_lines.count -gt 0 ) {
+
+        $queue_member_apex_formatted =  $queue_member_setup_lines -join ",`n`n"
+
+        $queue_member_apex_instantiation_lines = @"
 List<GroupMember> groupMemberAssignments = new List<GroupMember>{
 "@
 
@@ -37,16 +41,16 @@ catch (Exception e) {
 }
 "@
 
-    $anonymous_apex_assign_queues = $queue_member_apex_instantiation_lines + "`n`n" + $queue_member_apex_formatted  + "`n`n" +  $queue_member_apex_closing_lines  
-    Write-Host $anonymous_apex_assign_queues
+        $anonymous_apex_assign_queues = $queue_member_apex_instantiation_lines + "`n`n" + $queue_member_apex_formatted  + "`n`n" +  $queue_member_apex_closing_lines  
+        Write-Host $anonymous_apex_assign_queues
 
-    $anonymous_apex_file_name = "anonymous_apex_assign_queues.cls"
-    # Below lines used for powershell 7
-    # New-Item -Type File $anonymous_apex_file_name | Out-Null
-    # $anonymous_apex_assign_queues | Out-File $anonymous_apex_file_name
-    New-Item -Path . -Name $anonymous_apex_file_name -ItemType "file" -value $anonymous_apex_assign_queues -Force | Out-Null
-    Write-Host "running 'sfdx force:apex:execute -u $($env:ORG_ALIAS) -f $anonymous_apex_file_name' --loglevel ERROR"
-    sfdx force:apex:execute -u ($env:ORG_ALIAS) -f $anonymous_apex_file_name --loglevel ERROR --json
-    Remove-Item -Force $anonymous_apex_file_name
+        $anonymous_apex_file_name = "anonymous_apex_assign_queues.cls"
+
+        New-Item -Path . -Name $anonymous_apex_file_name -ItemType "file" -value $anonymous_apex_assign_queues -Force | Out-Null
+        Write-Host "running 'sfdx force:apex:execute -u $($env:ORG_ALIAS) -f $anonymous_apex_file_name' --loglevel ERROR"
+        sfdx force:apex:execute -u ($env:ORG_ALIAS) -f $anonymous_apex_file_name --loglevel ERROR --json
+        Remove-Item -Force $anonymous_apex_file_name
+
+    }
 
 }
