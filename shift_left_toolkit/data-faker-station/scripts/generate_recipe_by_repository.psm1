@@ -31,8 +31,8 @@ $static_salesforce_field_to_fake_recipe_map = @{
     'time' =                 [PSCustomObject]@{ 'recipe'='${{ fake.time }}'; }
     'longtextarea' =         [PSCustomObject]@{ 'recipe'='${{ fake.paragraph }}'; }
     'url' =                  [PSCustomObject]@{ 'recipe'='${{ fake.url }}'; }
-    'location' =             [PSCustomObject]@{ 'recipe'='##### SEE ONE PAGER FOR NECESSARY ADJUSTMENTS: https://github.com/department-of-veterans-affairs/va-salesforce-dojo/wiki/Snowfakery-Recipe-One-Pager#:~:text=by%20Field%20Type-,Location%20Field,-A%20location%20type '; }
-    'lookup' =               [PSCustomObject]@{ 'recipe'='##### SEE ONE PAGER FOR NECESSARY ADJUSTMENTS: https://github.com/department-of-veterans-affairs/va-salesforce-dojo/wiki/Snowfakery-Recipe-One-Pager#:~:text=fake%3A%20longitude-,Lookup%20Field,-In%20order%20to '; }
+    'location' =             [PSCustomObject]@{ 'recipe'='##### SEE ONE PAGER FOR NECESSARY ADJUSTMENTS: https://github.com/jdschleicher/demo-dreamhouse-lwc-shift-left/blob/main/shift_left_toolkit/data-faker-station/documentation/Snowfakery-Recipe-One-Pager.md#:~:text=by%20Field%20Type-,Location%20Field,-A%20location%20type'; }
+    'lookup' =               [PSCustomObject]@{ 'recipe'='##### SEE ONE PAGER FOR NECESSARY ADJUSTMENTS: https://github.com/jdschleicher/demo-dreamhouse-lwc-shift-left/blob/main/shift_left_toolkit/data-faker-station/documentation/Snowfakery-Recipe-One-Pager.md#:~:text=fake%3A%20longitude-,Lookup%20Field,-In%20order%20to'; }
     'encryptedtext' =        [PSCustomObject]@{ 'recipe'='${{ fake.credit_card_number }}'; }
 }
 
