@@ -1,0 +1,155 @@
+[
+  {
+    "customer_persona": "ebikes_employee_800_bin",
+    "id": "0053R000002A0IhQAK",
+    "role_api_name": "eBikes_Employees",
+    "username": "ebikes_employee_800_bin@watrs.gov.___funinspiration8562___",
+    "active": true,
+    "email_address": "jonathon.schleicher@octo.us",
+    "firstname": "Bruce",
+    "lastname": "ebikes_employee_800_bin",
+    "profilename": "System Administrator",
+    "permset_api_names": [
+      "eBikes_Case_ManagerEmployee"
+    ],
+    "group_api_names": [
+      "eBikes_Employee_Share_Read_Write",
+      "eBikes_Organization_Share_Read_Only"
+    ],
+    "queue_api_names": [],
+    "login_url": "https://fun-inspiration-8562.my.salesforce.com?un=ebikes_employee_800_bin@watrs.gov.___funinspiration8562___&pw=05172023Vi84AzFUiN"
+  },
+  {
+    "customer_persona": "ebikes_case_manager",
+    "id": "0053R000002A0IiQAK",
+    "role_api_name": "eBikes_Management",
+    "username": "ebikes_case_manager@watrs.gov.___funinspiration8562___",
+    "active": true,
+    "email_address": "jonathon.schleicher@b3groupinc.com",
+    "firstname": "Abe",
+    "lastname": "ebikes_case_manager",
+    "profilename": "System Administrator",
+    "permset_api_names": [
+      "eBikes_Case_ManagerEmployee"
+    ],
+    "group_api_names": [
+      "eBikes_Employee_Share_Read_Write",
+      "eBikes_Organization_Share_Read_Only"
+    ],
+    "queue_api_names": [],
+    "login_url": "https://fun-inspiration-8562.my.salesforce.com?un=ebikes_case_manager@watrs.gov.___funinspiration8562___&pw=05172023HpxroyR4"
+  },
+  {
+    "customer_persona": "management_analyst",
+    "id": "0053R000002A0IjQAK",
+    "role_api_name": "eBikes_Management",
+    "username": "management_analyst@watrs.gov.___funinspiration8562___",
+    "active": true,
+    "email_address": "jonathon.schleicher@b3groupinc.com",
+    "firstname": "Suzie",
+    "lastname": "management_analyst",
+    "profilename": "System Administrator",
+    "permset_api_names": [
+      "eBikes_Management"
+    ],
+    "group_api_names": [
+      "eBikes_Employee_Share_Read_Write",
+      "eBikes_Organization_Share_Read_Only",
+      "eBikes_All_Sites_Share_Read_Write"
+    ],
+    "queue_api_names": [
+      "Management_ApproeBikes_l_Queue"
+    ],
+    "login_url": "https://fun-inspiration-8562.my.salesforce.com?un=management_analyst@watrs.gov.___funinspiration8562___&pw=05172023SnOOwQnAja"
+  },
+  {
+    "customer_persona": "team_leader",
+    "id": "0053R000002A0IkQAK",
+    "role_api_name": "eBikes_Team_Leader",
+    "username": "team_leader@watrs.gov.___funinspiration8562___",
+    "active": true,
+    "email_address": "jonathon.schleicher@b3groupinc.com",
+    "firstname": "Suzie",
+    "lastname": "team_leader",
+    "profilename": "System Administrator",
+    "permset_api_names": [
+      "eBikes_Team_Leader"
+    ],
+    "group_api_names": [
+      "eBikes_Employee_Share_Read_Write",
+      "eBikes_Organization_Share_Read_Only",
+      "eBikes_All_Sites_Share_Read_Write"
+    ],
+    "queue_api_names": [],
+    "login_url": "https://fun-inspiration-8562.my.salesforce.com?un=team_leader@watrs.gov.___funinspiration8562___&pw=05172023OcEpAATl"
+  },
+  {
+    "customer_persona": "site_supervisor",
+    "id": "",
+    "role_api_name": "eBikes_Management",
+    "username": "site_supervisor@watrs.gov",
+    "active": false,
+    "email_address": "jonathon.schleicher@octo.us",
+    "firstname": "Suzie",
+    "lastname": "site_supervisor",
+    "profilename": "eBikes_EMPL Base Platform",
+    "permset_api_names": [
+      "eBikes_Management"
+    ],
+    "group_api_names": [
+      "eBikes_Employee_Share_Read_Write",
+      "eBikes_Organization_Share_Read_Only",
+      "eBikes_All_Sites_Share_Read_Write"
+    ],
+    "queue_api_names": [
+      "Management_ApproeBikes_l_Queue"
+    ],
+    "login_url": ""
+  },
+  {
+    "customer_persona": "director_mps_appeals",
+    "id": "",
+    "role_api_name": "eBikes_Management",
+    "username": "director_mps_appeals@watrs.gov",
+    "active": false,
+    "email_address": "jonathon.schleicher@octo.us",
+    "firstname": "Suzie",
+    "lastname": "director_mps_appeals",
+    "profilename": "eBikes_EMPL Base Platform",
+    "permset_api_names": [
+      "eBikes_Management"
+    ],
+    "group_api_names": [
+      "eBikes_Employee_Share_Read_Write",
+      "eBikes_Organization_Share_Read_Only",
+      "eBikes_All_Sites_Share_Read_Write"
+    ],
+    "queue_api_names": [
+      "Management_ApproeBikes_l_Queue"
+    ],
+    "login_url": ""
+  },
+  {
+    "customer_persona": "supervisor_mps_appeals",
+    "id": "",
+    "role_api_name": "eBikes_Management",
+    "username": "supervisor_mps_appeals@watrs.gov",
+    "active": false,
+    "email_address": "jonathon.schleicher@octo.us",
+    "firstname": "Suzie",
+    "lastname": "supervisor_mps_appeals",
+    "profilename": "eBikes_EMPL Base Platform",
+    "permset_api_names": [
+      "eBikes_Management"
+    ],
+    "group_api_names": [
+      "eBikes_Employee_Share_Read_Write",
+      "eBikes_Organization_Share_Read_Only",
+      "eBikes_All_Sites_Share_Read_Write"
+    ],
+    "queue_api_names": [
+      "Management_ApproeBikes_l_Queue"
+    ],
+    "login_url": ""
+  }
+]

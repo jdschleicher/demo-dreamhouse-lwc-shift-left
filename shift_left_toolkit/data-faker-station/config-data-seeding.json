@@ -1,0 +1,7 @@
+{
+    "path_to_recipes": "recipes",
+    "use_existing": "false",
+    "path_to_generated_org_data_seeding": "generated-data-faker-station",
+    "path_to_objects_directory": "force-app/main/default/objects",
+    "reuse_datetime_stamp": "20220107-1999"
+}

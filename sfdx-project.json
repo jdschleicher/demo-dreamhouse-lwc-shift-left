@@ -1,0 +1,16 @@
+{
+  "packageDirectories": [
+    {
+      "path": "force-app",
+      "package": "ebikes-testing",
+      "versionNumber": "1.0.0.NEXT",
+      "default": true
+    }
+  ],
+  "sourceApiVersion": "57.0",
+  "packageAliases": {
+    "ebikes-testing": "0HoOE000000000Q0AQ",
+    "ebikes-testing@1.0.0-46": "04tOE0000000RhOYAU",
+    "ebikes-testing@1.0.0-47": "04tOE0000000RhTYAU"
+  }
+}

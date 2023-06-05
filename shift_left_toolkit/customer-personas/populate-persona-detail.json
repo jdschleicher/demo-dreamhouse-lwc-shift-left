@@ -1,0 +1,146 @@
+[
+  {
+    "username": "tjone.pss@eBikes_.gov.psipint",
+    "active": true,
+    "email_address": "christopher.zsebehazy@eBikes_.gov",
+    "firstname": "Tim",
+    "lastname": "Jones PSS",
+    "profilename": "eBikes_VET Base Platform",
+    "permset_api_names": [
+      "PSIP_PSS"
+    ],
+    "group_api_names": [
+      "PSIP_All_Users",
+      "PSIP_PerSec_Group",
+      "PSIP_Contract_P_00000001_Group",
+      "PSIP_Contract_P_00000002_Group"
+    ],
+    "queue_api_names": [],
+    "login_url": ""
+  },
+  {
+    "username": "c.berry.poc@eBikes_.gov.psipint.test",
+    "active": true,
+    "email_address": "christopher.zsebehazy@eBikes_.gov",
+    "firstname": "Chester",
+    "lastname": "Berry POC",
+    "profilename": "eBikes_VET Base Platform",
+    "permset_api_names": [
+      "PSIP_BI_Submitter"
+    ],
+    "group_api_names": [
+      "PSIP_All_Users",
+      "PSIP_Contractor_POC",
+      "PSIP_Contract_P_00000009_Group",
+      "PSIP_Contract_P_00000001_Group"
+    ],
+    "queue_api_names": [],
+    "login_url": ""
+  },
+  {
+    "username": "jsmit.persec@eBikes_.gov.psipint",
+    "active": true,
+    "email_address": "christopher.zsebehazy@eBikes_.gov",
+    "firstname": "Joe",
+    "lastname": "Smith PERSEC",
+    "profilename": "eBikes_VET Base Platform",
+    "permset_api_names": [
+      "PSIP_PERSEC_Management"
+    ],
+    "group_api_names": [
+      "PSIP_All_Users",
+      "PSIP_PerSec_Group",
+      "PSIP_Contract_P_00000001_Group",
+      "PSIP_Contract_P_00000002_Group"
+    ],
+    "queue_api_names": [],
+    "login_url": ""
+  },
+  {
+    "username": "proth.readonly@eBikes_.gov.psipint",
+    "active": true,
+    "email_address": "christopher.zsebehazy@eBikes_.gov",
+    "firstname": "Phyllis",
+    "lastname": "Roth RO",
+    "profilename": "eBikes_VET Base Platform",
+    "permset_api_names": [
+      "PSIP_Read_Only"
+    ],
+    "group_api_names": [
+      "PSIP_PerSec_Group"
+    ],
+    "queue_api_names": [],
+    "login_url": ""
+  },
+  {
+    "username": "jfillmore.pss@eBikes_.gov.psipint",
+    "active": true,
+    "email_address": "christopher.zsebehazy@eBikes_.gov",
+    "firstname": "Jim",
+    "lastname": "Fillmore PSS",
+    "profilename": "eBikes_VET Base Platform",
+    "permset_api_names": [
+      "PSIP_PSS"
+    ],
+    "group_api_names": [
+      "PSIP_All_Users",
+      "PSIP_PerSec_Group",
+      "PSIP_Contract_P_00000001_Group",
+      "PSIP_Contract_P_00000002_Group"
+    ],
+    "queue_api_names": [],
+    "login_url": ""
+  },
+  {
+    "username": "d.hathaway.readonly@eBikes_.gov.psipint",
+    "active": true,
+    "email_address": "christopher.zsebehazy@eBikes_.gov",
+    "firstname": "Donny",
+    "lastname": "Hathaway RO",
+    "profilename": "eBikes_VET Base Platform",
+    "permset_api_names": [
+      "PSIP_Read_Only"
+    ],
+    "group_api_names": [
+      "PSIP_All_Users",
+      "PSIP_PerSec_Group"
+    ],
+    "queue_api_names": [],
+    "login_url": ""
+  },
+  {
+    "username": "lfiest.cor@eBikes_.gov.psipint",
+    "active": true,
+    "email_address": "christopher.zsebehazy@eBikes_.gov",
+    "firstname": "Leslie",
+    "lastname": "Fiest COR",
+    "profilename": "eBikes_VET Base Platform",
+    "permset_api_names": [
+      "PSIP_COR"
+    ],
+    "group_api_names": [
+      "PSIP_All_Users",
+      "PSIP_COR",
+      "PSIP_Contract_P_00000001_Group"
+    ],
+    "queue_api_names": [],
+    "login_url": ""
+  },
+  {
+    "username": "dsuzu.cor@eBikes_.gov.psipint",
+    "active": true,
+    "email_address": "christopher.zsebehazy@eBikes_.gov",
+    "firstname": "Damo",
+    "lastname": "Suzuki COR",
+    "profilename": "eBikes_VET Base Platform",
+    "permset_api_names": [
+      "PSIP_COR"
+    ],
+    "group_api_names": [
+      "PSIP_All_Users",
+      "PSIP_Contract_P_00000002_Group"
+    ],
+    "queue_api_names": [],
+    "login_url": ""
+  }
+]

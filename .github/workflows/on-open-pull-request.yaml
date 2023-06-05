@@ -1,0 +1,96 @@
+name: on-open-pull-request
+
+on:
+  pull_request:
+    branches:
+      - 'release*'
+    types: [opened, synchronize, reopened]
+
+env:
+  SCRATCH_ORG_ALIAS:            "ci-org"
+  DEVHUB_ALIAS:                 "devhub"
+
+jobs:
+ 
+  on-open-pull-request:
+    runs-on: ubuntu-latest
+
+    outputs:
+        default_package_name: ${{ steps.get_default_package.outputs.default_package_name }}
+        default_package_directory: ${{ steps.get_default_package.outputs.default_package_directory }}
+        quick_build_package_version_subscriber_id: ${{ steps.quick_version_build.outputs.quick_build_package_version_subscriber_id}}
+    
+    steps:
+
+      - name: NODE INSTALL OVERWRITE FOR ISSUE https://github.com/forcedotcom/cli/issues/2125
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.14.2'
+
+      - name: CHECKOUT CURRENT REPOSITORY IN VIRTUAL MACHINE
+        uses: actions/checkout@v3
+  
+      - name: GET DEFAULT PACKAGE INFO
+        shell: pwsh
+        id: get_default_package
+        run: . .\ci_system\sfdx\get_default_package_info.ps1 
+
+      - name: INSTALL SFDX 
+        run: |
+          npm install sfdx-cli --global
+          sfdx --version
+
+      - name: INSTALL SFDX CLI AND SCANNER
+        run: |
+          npm install sfdx-cli -g
+          sfdx plugins:install @salesforce/sfdx-scanner
+  
+      - name: RUN SECURITY SFDX SCANNER
+        shell: pwsh
+        run: | 
+          $sfdx_package_default_directory = "${{ steps.get_default_package.outputs.default_package_directory }}"
+          sfdx scanner:run --target "force-app" --format json  --engine "pmd"  --category  'Security' --severity-threshold 2
+
+      - name: AUTHENTICATE DEVHUB AUTH URL
+        env:
+          DEVHUB_AUTH_URL: ${{ secrets.DEVHUB_AUTH_URL }}
+        shell: pwsh
+        run: . ./ci_system/sfdx/auth_url.ps1 -auth_url $env:DEVHUB_AUTH_URL -org_alias "$env:DEVHUB_ALIAS"
+
+      - name: CREATE SCRATCH ORG
+        shell: pwsh
+        run: . ./ci_system/sfdx/create_scratch_org.ps1 -devhub_alias $env:DEVHUB_ALIAS -scratch_org_alias $env:SCRATCH_ORG_ALIAS
+
+      - name: INSTALL SFDX TEXEI PLUGIN
+        shell: pwsh 
+        run: echo "y" | sfdx plugins:install texei-sfdx-plugin
+
+      - name: INSTALL PACKAGE DEPENDENCIES WITH TEXEI
+        shell: pwsh
+        run:  sfdx texei:package:dependencies:install -u $env:SCRATCH_ORG_ALIAS -v $env:DEVHUB_ALIAS --noprompt -w 120 --json
+
+      - name: QUICK PACKAGE VERSION BUILD
+        id: quick_version_build  
+        shell: pwsh
+        run: |
+          $default_package_name = "${{ steps.get_default_package.outputs.default_package_name }}"
+          $devhub_alias = $env:DEVHUB_ALIAS
+          . .\ci_system\sfdx\quick_package_version_build.ps1 -package_name "$default_package_name" -devhub_alias "$devhub_alias" 
+
+      - name: TEST INSTALL OF QUICK PACKAGE VERSION INTO SCRATCH ORG
+        shell: pwsh
+        run: |
+          $subscriber_package_version_id = "${{ steps.quick_version_build.outputs.quick_build_package_version_subscriber_id }}"
+          Write-Host "subscriber_package_version_id : $subscriber_package_version_id"
+          . ./ci_system/sfdx/install_package_version_to_org.ps1 -org_to_install_alias $env:SCRATCH_ORG_ALIAS -subscriber_package_version_id $subscriber_package_version_id
+
+      - name: EXECUTE PACKAGE BASED UNIT TESTS
+        shell: pwsh
+        run: |
+          $sfdx_package_default_directory = "${{ steps.get_default_package.outputs.default_package_directory }}"
+          Write-Host "sfdx_package_default_directory: $sfdx_package_default_directory"
+          ### THE BELOW VARIABLE is_special_reason_to_pass_no_matter IS A WORKAROUND BECAUSE EBIKES RELIES ON EXPERIENCE CLOUD DEFAULT APEX CLASSES FOR TEST COVERAGE
+          ### THE BELOW TEST RUN ONLY MEASURES CODECOVERAGE FOR WHAT IS IN THE PACKAGE DEFAULT DIRECTORY
+          $is_special_reason_to_pass_no_matter = $true
+          . ./ci_system/sfdx/run_unit_tests_by_default_package_directory.ps1 -unit_tests_target_org $env:SCRATCH_ORG_ALIAS -sfdx_package_default_directory $sfdx_package_default_directory -is_special_reason_to_pass_no_matter $is_special_reason_to_pass_no_matter
+
