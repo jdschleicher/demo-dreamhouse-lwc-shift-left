@@ -23,7 +23,7 @@ if ($current_directory_contains_shift_left_toolkit_directory) {
                     -timestamp $timestamp
 
 } else {
-    Write-Error -Message "ERROR: THIS SCRIPT MUST RUN FROM eBikes_-salesforce-dojo DIRECTORY CONTAINING SHIFT_LEFT_TOOLKIT DIRECTORY" -ErrorAction Stop
+    Write-Error -Message "ERROR: THIS SCRIPT MUST RUN FROM va-salesforce-dojo DIRECTORY CONTAINING SHIFT_LEFT_TOOLKIT DIRECTORY" -ErrorAction Stop
 }
 
 $elapsed_seconds = $stopwatch.ElapsedMilliseconds/1000

@@ -1,4 +1,4 @@
-ORG Data Seeding is a "Configuration as Code" approach in "seeding" an environment with meaningful and Production-Like data. This functionality is aeBikes_ilable in scratch orgs and sandboxes.
+ORG Data Seeding is a "Configuration as Code" approach in "seeding" an environment with meaningful and Production-Like data. This functionality is available in scratch orgs and sandboxes.
 
 In an attempt to empower Frontline Team Members to truly meet "Code Complete", Org Data Seeding was developed as a configurable way to create randomized and structured data in a flexible and scalable approach. Org Data Seeding can be leveraged at any point in the SDLC to enable any environment's data to be Production-Like as we test functionality. Whether at the development stage, regression stage, or designing data sets to support automated UI tests, Org Data Seeding is an effective, version-able, and customizable approach to seeding Production-like data to help ensure quality with each new piece of functionality we build.
 

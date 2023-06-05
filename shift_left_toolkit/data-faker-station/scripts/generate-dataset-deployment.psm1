@@ -48,7 +48,7 @@ function map_snowfakery_records_to_dataset_records {
   if ($snowfakery_records.count -gt 0){
     foreach ($snowfakery_record in $snowfakery_records) {`
         $attributes = map_id_to_attributes -id ($snowfakery_record.id) $metadata_type_name
-        $snowfakery_record | Add-Member -Name 'attributes' -eBikes_lue $attributes -Type NoteProperty | Out-Null
+        $snowfakery_record | Add-Member -Name 'attributes' -value $attributes -Type NoteProperty | Out-Null
         $snowfakery_record.psobject.Properties.remove('id') | Out-Null
     }
   }

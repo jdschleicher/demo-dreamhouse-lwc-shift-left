@@ -1,5 +1,5 @@
 
-#ENVIRONMENT eBikes_RIABLES BASED OFF OF DEFAULTUSERNAME FOR ORG IN THE sfdx-config.json FILE IN THE .sfdx DIRECTORY AT THE ROOT OF THE PROJECT
+#ENVIRONMENT vaRIABLES BASED OFF OF DEFAULTUSERNAME FOR ORG IN THE sfdx-config.json FILE IN THE .sfdx DIRECTORY AT THE ROOT OF THE PROJECT
 # EXAMPLE OF EXPECTED CODE CONTENT IN sfdx-config.json:
 ##  {
 ##    "defaultusername": "org_alias"
@@ -12,7 +12,7 @@ $current_directory_contains_shift_left_toolkit_directory = $names_of_current_dir
 
 if ($current_directory_contains_shift_left_toolkit_directory) {
     
-    . shift_left_toolkit/customer-personas/environment-eBikes_riables-setup/initialize-environment-eBikes_riables.ps1
+    . shift_left_toolkit/customer-personas/environment-variables-setup/initialize-environment-variables.ps1
     . shift_left_toolkit/customer-personas/scripts/0-process-user-persona-json.ps1
     . shift_left_toolkit/customer-personas/scripts/2-insert-users.ps1
     . shift_left_toolkit/customer-personas/scripts/3-assign-user-permsets.ps1
@@ -23,7 +23,7 @@ if ($current_directory_contains_shift_left_toolkit_directory) {
 
 }
 else {
-    Write-Error -Message "ERROR: THIS SCRIPT MUST RUN FROM eBikes_-salesforce-dojo DIRECTORY CONTAINING SHIFT_LEFT_TOOLKIT DIRECTORY" -ErrorAction Stop
+    Write-Error -Message "ERROR: THIS SCRIPT MUST RUN FROM va-salesforce-dojo DIRECTORY CONTAINING SHIFT_LEFT_TOOLKIT DIRECTORY" -ErrorAction Stop
 }
 
 $elapsed_seconds = $stopwatch.ElapsedMilliseconds/1000

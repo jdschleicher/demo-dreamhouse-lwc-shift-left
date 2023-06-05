@@ -6,8 +6,8 @@ function set_user_passwords {
     $anon_apex_lines = [system.collections.generic.list[pscustomobject]]::new()
 
     foreach ($username_to_user_info_map in $map_username_to_user_info.GetEnumerator()) {
-        $user_id = $username_to_user_info_map.eBikes_lue.user_id
-        $generated_password = $username_to_user_info_map.eBikes_lue.password
+        $user_id = $username_to_user_info_map.value.user_id
+        $generated_password = $username_to_user_info_map.value.password
         $apex = @"
     System.setPassword('$user_id', '$generated_password'); 
 "@
@@ -17,7 +17,7 @@ function set_user_passwords {
     $anonymous_apex_pw_update = $anon_apex_lines -join "`n`n"
 
     $anonymous_apex_file_name = "anonymous_apex_pw_update.cls"
-    New-Item -Path . -Name $anonymous_apex_file_name -ItemType "file" -eBikes_lue $anonymous_apex_pw_update -Force | Out-Null
+    New-Item -Path . -Name $anonymous_apex_file_name -ItemType "file" -value $anonymous_apex_pw_update -Force | Out-Null
 
     sfdx force:apex:execute -u ($env:ORG_ALIAS) -f $anonymous_apex_file_name
     Remove-Item -Force $anonymous_apex_file_name
