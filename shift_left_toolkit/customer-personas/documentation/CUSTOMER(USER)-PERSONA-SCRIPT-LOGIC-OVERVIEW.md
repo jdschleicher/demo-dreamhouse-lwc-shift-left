@@ -1,9 +1,9 @@
 * ### PROCESS CUSTOMER(USER) PERSONA JSON FROM THE user-detail.json FILE
 
-This functionality is responsible for capturing Salesforce specific IDs for the Permission Sets, Queues, Groups, and Profiles listed in the user-details.json. This is done by creating json files based off of the user-detail.json, holding expected structures and eBikes_lues that will be referenced in the additional functionality and associated logic. These structure files are created within a directory ".github-workflow-tmp" and these files can be referenced to ensure the map structures expected contain the correct Id's and not null eBikes_lues. 
+This functionality is responsible for capturing Salesforce specific IDs for the Permission Sets, Queues, Groups, and Profiles listed in the user-details.json. This is done by creating json files based off of the user-detail.json, holding expected structures and values that will be referenced in the additional functionality and associated logic. These structure files are created within a directory ".github-workflow-tmp" and these files can be referenced to ensure the map structures expected contain the correct Id's and not null values. 
 
-* ### DEACTIeBikes_TE EXISTING USERS
-Ensures that previously existing Customer Personas with the same Username, that may have been previously added to the target scratch org, are deactieBikes_ted and Username and name details adjusted to “inactive” titles. This ensures that the latest information is captured for the Customer Persona. This is a task important for integrated environments
+* ### DEACTIvaTE EXISTING USERS
+Ensures that previously existing Customer Personas with the same Username, that may have been previously added to the target scratch org, are deactivated and Username and name details adjusted to “inactive” titles. This ensures that the latest information is captured for the Customer Persona. This is a task important for integrated environments
 
 * ### INSERT USERS
 Leveraging the information given in the user-detail.json file, creates a Salesforce user representing each object entry in the user-detail.json file

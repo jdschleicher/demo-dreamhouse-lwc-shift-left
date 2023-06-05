@@ -6,7 +6,7 @@ $path_to_project_directory = (Get-Location).path
 $path_to_github_workflow_tmp_directory = "$path_to_project_directory/.github-workflow-tmp"
 Import-Module -Force "$path_to_project_directory/shift_left_toolkit/customer-personas/scripts/user-persona-automation.psm1"
 Import-Module -Force "$path_to_project_directory/shift_left_toolkit/customer-personas/scripts/0-process-user-persona-json.psm1"
-Import-Module -Force "$path_to_project_directory/shift_left_toolkit/customer-personas/scripts/1-deactieBikes_te-existing-users.psm1"
+Import-Module -Force "$path_to_project_directory/shift_left_toolkit/customer-personas/scripts/1-deactivate-existing-users.psm1"
 
 [array]$user_personas = get_user_personas_from_user_detailjson -path_to_project_directory $path_to_project_directory  
 [array]$usernames = $user_personas | foreach username
@@ -19,7 +19,7 @@ write_user_personas_to_user_detail_file -user_personas $user_personas -path_to_p
 
 $org_isntance_url_usernames = $user_personas | foreach username
 $org_instance_url_usernames_and_original_usernames = ($usernames + $org_isntance_url_usernames)
-deactieBikes_te_existing_users -usernames $org_instance_url_usernames_and_original_usernames
+deactivate_existing_users -usernames $org_instance_url_usernames_and_original_usernames
 
 [array]$active_user_personas = get_active_user_personas_from_user_detailjson -path_to_project_directory $path_to_project_directory    
 
@@ -125,7 +125,7 @@ $active_user_personas | foreach {
 #         "role" : []
 #     }
 # }
-# the function params can remain the same, but just pass the appropriate indexed eBikes_lues in
+# the function params can remain the same, but just pass the appropriate indexed values in
 $map_username_to_permset_info | ConvertTo-Json | Out-File "$path_to_github_workflow_tmp_directory/map_username_to_permset_info.json"
 $map_username_to_queue_info | ConvertTo-Json | Out-File "$path_to_github_workflow_tmp_directory/map_username_to_queue_info.json"
 $map_username_to_group_info | ConvertTo-Json | Out-File "$path_to_github_workflow_tmp_directory/map_username_to_group_info.json"
