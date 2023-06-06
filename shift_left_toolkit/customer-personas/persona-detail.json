@@ -3,12 +3,12 @@
     "customer_persona": "Broker_Manager",
     "id": "",
     "role_api_name": "",
-    "username": "dreamhouse@user.com",
+    "username": "mike_dreamhouse@user.com",
     "active": true,
     "email_address": "jonathon.schleicher@octo.us",
     "firstname": "Mike",
     "lastname": "Nowak",
-    "profilename": "System Administrator",
+    "profilename": "Standard User",
     "permset_api_names": [
       "dreamhouse"
     ],
@@ -21,12 +21,12 @@
     "customer_persona": "Property_Owner",
     "id": "",
     "role_api_name": "",
-    "username": "property_owner@customer.com",
+    "username": "julie_owner@customer.com",
     "active": true,
     "email_address": "jdschleicher@gmail.com",
     "firstname": "Julie",
     "lastname": "Smith",
-    "profilename": "Standard User",
+    "profilename": "Chatter Free User",
     "permset_api_names": [
       "dreamhouse"
     ],
