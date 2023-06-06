@@ -203,8 +203,8 @@ jobs:
           $package_promote_result.status
 
       - name: PRODUCTION INSTALL
+        shell: pwsh
         run: |
           $subscriber_package_version_id = "${{ needs.full-validate-package-version-build.outputs.full_build_package_version_subscriber_id }}"
-          Write-Host "uat subscriber_package_version_id : $subscriber_package_version_id"
+          Write-Host "prod subscriber_package_version_id : $subscriber_package_version_id"
           . ./ci_system/sfdx/install_package_version_to_org.ps1 -org_to_install_alias "$env:PROD_ORG_ALIAS" -subscriber_package_version_id $subscriber_package_version_id
-

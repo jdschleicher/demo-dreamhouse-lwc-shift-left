@@ -3,7 +3,7 @@
     {
       "path": "force-app",
       "package": "demo-dreamhouse-lwc",
-      "versionNumber": "1.0.0.NEXT",
+      "versionNumber": "1.1.0.NEXT",
       "default": true,
       "versionDescription": "Demo package for dreamhouse-lwc"
     }

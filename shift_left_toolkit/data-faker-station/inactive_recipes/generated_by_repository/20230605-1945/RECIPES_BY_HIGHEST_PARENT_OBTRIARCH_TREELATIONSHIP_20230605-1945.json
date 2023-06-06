@@ -1,0 +1,260 @@
+{
+  "Broker__c": [
+    {
+      "Level": 1,
+      "ApiName": "Broker__c",
+      "ParentIds": [],
+      "IsSelfReferencing": false,
+      "CountOfSelfReferences": 0,
+      "RecipeFamilyTree": "Broker__c",
+      "Recipes": [
+        {
+          "ApiName": "Broker_Id__c",
+          "Type": "number",
+          "Recipevalue": "${{ fake.pyint( min_value = -10000, max_value = 100000 ) }}",
+          "IsLookup": false,
+          "LookupRecipe": null,
+          "IsFormulaField": false
+        },
+        {
+          "ApiName": "Email__c",
+          "Type": "email",
+          "Recipevalue": "${{ fake.ascii_safe_email}}",
+          "IsLookup": false,
+          "LookupRecipe": null,
+          "IsFormulaField": false
+        },
+        {
+          "ApiName": "Is_Commercial_Certified__c",
+          "Type": "checkbox",
+          "Recipevalue": "${{ random_choice(\"true\",\"false\") }}",
+          "IsLookup": false,
+          "LookupRecipe": null,
+          "IsFormulaField": false
+        },
+        {
+          "ApiName": "Mobile_Phone__c",
+          "Type": "phone",
+          "Recipevalue": "${{ fake.phone_number }}",
+          "IsLookup": false,
+          "LookupRecipe": null,
+          "IsFormulaField": false
+        },
+        {
+          "ApiName": "Phone__c",
+          "Type": "phone",
+          "Recipevalue": "${{ fake.phone_number }}",
+          "IsLookup": false,
+          "LookupRecipe": null,
+          "IsFormulaField": false
+        },
+        {
+          "ApiName": "Picture__c",
+          "Type": "url",
+          "Recipevalue": "${{ fake.url }}",
+          "IsLookup": false,
+          "LookupRecipe": null,
+          "IsFormulaField": false
+        },
+        {
+          "ApiName": "Title__c",
+          "Type": "text",
+          "Recipevalue": "${{ fake.text(max_nb_chars=20) }}",
+          "IsLookup": false,
+          "LookupRecipe": null,
+          "IsFormulaField": false
+        }
+      ],
+      "MaxCountTimesReferencedBySingleObject": 1,
+      "ChildObjectsThatReferenceThisNode": [
+        "Property__c"
+      ]
+    },
+    {
+      "Level": 2,
+      "ApiName": "Property__c",
+      "ParentIds": [
+        "Broker__c"
+      ],
+      "IsSelfReferencing": false,
+      "CountOfSelfReferences": 0,
+      "RecipeFamilyTree": "Broker__c",
+      "Recipes": [
+        {
+          "ApiName": "Address__c",
+          "Type": "text",
+          "Recipevalue": "${{ fake.text(max_nb_chars=20) }}",
+          "IsLookup": false,
+          "LookupRecipe": null,
+          "IsFormulaField": false
+        },
+        {
+          "ApiName": "Assessed_Value__c",
+          "Type": "currency",
+          "Recipevalue": "${{ fake.pyfloat( right_digits = 2, positive=True, min_value=None, max_value=1000000) }}",
+          "IsLookup": false,
+          "LookupRecipe": null,
+          "IsFormulaField": false
+        },
+        {
+          "ApiName": "Baths__c",
+          "Type": "number",
+          "Recipevalue": "${{ fake.pyint( min_value = -10000, max_value = 100000 ) }}",
+          "IsLookup": false,
+          "LookupRecipe": null,
+          "IsFormulaField": false
+        },
+        {
+          "ApiName": "Beds__c",
+          "Type": "number",
+          "Recipevalue": "${{ fake.pyint( min_value = -10000, max_value = 100000 ) }}",
+          "IsLookup": false,
+          "LookupRecipe": null,
+          "IsFormulaField": false
+        },
+        {
+          "ApiName": "Broker__c",
+          "Type": "lookup",
+          "Recipevalue": "Broker__cRef${{ reference(Broker__c_NickName)}}",
+          "IsLookup": true,
+          "LookupRecipe": {
+            "LookupType": "lookup",
+            "LookupObjectApiName": "Broker__c",
+            "RelationshipApiName": "Properties"
+          },
+          "IsFormulaField": false
+        },
+        {
+          "ApiName": "City__c",
+          "Type": "text",
+          "Recipevalue": "${{ fake.text(max_nb_chars=20) }}",
+          "IsLookup": false,
+          "LookupRecipe": null,
+          "IsFormulaField": false
+        },
+        {
+          "ApiName": "Date_Agreement__c",
+          "Type": "date",
+          "Recipevalue": "${{ fake.date}}",
+          "IsLookup": false,
+          "LookupRecipe": null,
+          "IsFormulaField": false
+        },
+        {
+          "ApiName": "Date_Closed__c",
+          "Type": "date",
+          "Recipevalue": "${{ fake.date}}",
+          "IsLookup": false,
+          "LookupRecipe": null,
+          "IsFormulaField": false
+        },
+        {
+          "ApiName": "Date_Contracted__c",
+          "Type": "date",
+          "Recipevalue": "${{ fake.date}}",
+          "IsLookup": false,
+          "LookupRecipe": null,
+          "IsFormulaField": false
+        },
+        {
+          "ApiName": "Date_Listed__c",
+          "Type": "date",
+          "Recipevalue": "${{ fake.date}}",
+          "IsLookup": false,
+          "LookupRecipe": null,
+          "IsFormulaField": false
+        },
+        {
+          "ApiName": "Date_Pre_Market__c",
+          "Type": "date",
+          "Recipevalue": "${{ fake.date}}",
+          "IsLookup": false,
+          "LookupRecipe": null,
+          "IsFormulaField": false
+        },
+        {
+          "ApiName": "Description__c",
+          "Type": "longtextarea",
+          "Recipevalue": "${{ fake.paragraph }}",
+          "IsLookup": false,
+          "LookupRecipe": null,
+          "IsFormulaField": false
+        },
+        {
+          "ApiName": "Location__c",
+          "Type": "location",
+          "Recipevalue": "##### SEE ONE PAGER FOR NECESSARY ADJUSTMENTS: https://github.com/jdschleicher/demo-dreamhouse-lwc-shift-left/blob/main/shift_left_toolkit/data-faker-station/documentation/Snowfakery-Recipe-One-Pager.md#:~:text=by%20Field%20Type-,Location%20Field,-A%20location%20type",
+          "IsLookup": false,
+          "LookupRecipe": null,
+          "IsFormulaField": false
+        },
+        {
+          "ApiName": "Picture__c",
+          "Type": "url",
+          "Recipevalue": "${{ fake.url }}",
+          "IsLookup": false,
+          "LookupRecipe": null,
+          "IsFormulaField": false
+        },
+        {
+          "ApiName": "Price__c",
+          "Type": "currency",
+          "Recipevalue": "${{ fake.pyfloat( right_digits = 2, positive=True, min_value=None, max_value=1000000) }}",
+          "IsLookup": false,
+          "LookupRecipe": null,
+          "IsFormulaField": false
+        },
+        {
+          "ApiName": "Price_Sold__c",
+          "Type": "currency",
+          "Recipevalue": "${{ fake.pyfloat( right_digits = 2, positive=True, min_value=None, max_value=1000000) }}",
+          "IsLookup": false,
+          "LookupRecipe": null,
+          "IsFormulaField": false
+        },
+        {
+          "ApiName": "State__c",
+          "Type": "text",
+          "Recipevalue": "${{ fake.text(max_nb_chars=20) }}",
+          "IsLookup": false,
+          "LookupRecipe": null,
+          "IsFormulaField": false
+        },
+        {
+          "ApiName": "Status__c",
+          "Type": "picklist",
+          "Recipevalue": "${{ random_choice(\"Contracted\",\"Pre Market\",\"Available\",\"Under Agreement\",\"Closed\") }}",
+          "IsLookup": false,
+          "LookupRecipe": null,
+          "IsFormulaField": false
+        },
+        {
+          "ApiName": "Tags__c",
+          "Type": "text",
+          "Recipevalue": "${{ fake.text(max_nb_chars=20) }}",
+          "IsLookup": false,
+          "LookupRecipe": null,
+          "IsFormulaField": false
+        },
+        {
+          "ApiName": "Thumbnail__c",
+          "Type": "url",
+          "Recipevalue": "${{ fake.url }}",
+          "IsLookup": false,
+          "LookupRecipe": null,
+          "IsFormulaField": false
+        },
+        {
+          "ApiName": "Zip__c",
+          "Type": "text",
+          "Recipevalue": "${{ fake.text(max_nb_chars=20) }}",
+          "IsLookup": false,
+          "LookupRecipe": null,
+          "IsFormulaField": false
+        }
+      ],
+      "MaxCountTimesReferencedBySingleObject": 0,
+      "ChildObjectsThatReferenceThisNode": null
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+
+### TODO: THERE ARE DEPENDENT OBJECTS BELOW NEEDING REFERENCE OF THIS OBJECT'S "nickname": Property__c          
+- object: Broker__c
+  count: 1
+  nickname: Broker__c_NickName
+  fields:
+    Broker_Id__c: ${{ fake.pyint( min_value = -10000, max_value = 100000 ) }}   
+    Email__c: ${{ fake.ascii_safe_email}}   
+    Is_Commercial_Certified__c: ${{ random_choice("true","false") }}   
+    Mobile_Phone__c: ${{ fake.phone_number }}   
+    Phone__c: ${{ fake.phone_number }}   
+    Picture__c: ${{ fake.url }}   
+    Title__c: ${{ fake.text(max_nb_chars=20) }}   
+         
+- object: Property__c
+  count: 1
+  nickname: Property__c_NickName
+  fields:
+    Address__c: ${{ fake.text(max_nb_chars=20) }}   
+    Assessed_Value__c: ${{ fake.pyfloat( right_digits = 2, positive=True, min_value=None, max_value=1000000) }}   
+    Baths__c: ${{ fake.pyint( min_value = -10000, max_value = 100000 ) }}   
+    Beds__c: ${{ fake.pyint( min_value = -10000, max_value = 100000 ) }}   
+    Broker__c: Broker__cRef${{ reference(Broker__c_NickName)}}   ### TODO: THIS NICKNAME MUST MATCH UNIQUE 'NICKNAME' INDEX VALUE OF THE EXPECTED LOOKUP OBJECT ABOVE
+    City__c: ${{ fake.text(max_nb_chars=20) }}   
+    Date_Agreement__c: ${{ fake.date}}   
+    Date_Closed__c: ${{ fake.date}}   
+    Date_Contracted__c: ${{ fake.date}}   
+    Date_Listed__c: ${{ fake.date}}   
+    Date_Pre_Market__c: ${{ fake.date}}   
+    Description__c: ${{ fake.paragraph }}   
+    Location__c: ##### SEE ONE PAGER FOR NECESSARY ADJUSTMENTS: https://github.com/jdschleicher/demo-dreamhouse-lwc-shift-left/blob/main/shift_left_toolkit/data-faker-station/documentation/Snowfakery-Recipe-One-Pager.md#:~:text=by%20Field%20Type-,Location%20Field,-A%20location%20type   
+    Picture__c: ${{ fake.url }}   
+    Price__c: ${{ fake.pyfloat( right_digits = 2, positive=True, min_value=None, max_value=1000000) }}   
+    Price_Sold__c: ${{ fake.pyfloat( right_digits = 2, positive=True, min_value=None, max_value=1000000) }}   
+    State__c: ${{ fake.text(max_nb_chars=20) }}   
+    Status__c: ${{ random_choice("Contracted","Pre Market","Available","Under Agreement","Closed") }}   
+    Tags__c: ${{ fake.text(max_nb_chars=20) }}   
+    Thumbnail__c: ${{ fake.url }}   
+    Zip__c: ${{ fake.text(max_nb_chars=20) }}   

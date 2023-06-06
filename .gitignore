@@ -46,3 +46,6 @@ $RECYCLE.BIN/
 # UTAM
 pageObjects
 utam-lint.sarif
+
+# shift-left-toolkit
+.github-workflow-tmp/*
