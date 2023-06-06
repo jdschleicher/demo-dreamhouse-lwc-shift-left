@@ -1,11 +1,11 @@
 [
   {
-    "username": "tjone.pss@eBikes_.gov.psipint",
+    "username": "tjone.pss@va.gov.psipint",
     "active": true,
-    "email_address": "christopher.zsebehazy@eBikes_.gov",
+    "email_address": "christopher.zsebehazy@va.gov",
     "firstname": "Tim",
     "lastname": "Jones PSS",
-    "profilename": "eBikes_VET Base Platform",
+    "profilename": "vaVET Base Platform",
     "permset_api_names": [
       "PSIP_PSS"
     ],
@@ -19,12 +19,12 @@
     "login_url": ""
   },
   {
-    "username": "c.berry.poc@eBikes_.gov.psipint.test",
+    "username": "c.berry.poc@va.gov.psipint.test",
     "active": true,
-    "email_address": "christopher.zsebehazy@eBikes_.gov",
+    "email_address": "christopher.zsebehazy@va.gov",
     "firstname": "Chester",
     "lastname": "Berry POC",
-    "profilename": "eBikes_VET Base Platform",
+    "profilename": "vaVET Base Platform",
     "permset_api_names": [
       "PSIP_BI_Submitter"
     ],
@@ -38,12 +38,12 @@
     "login_url": ""
   },
   {
-    "username": "jsmit.persec@eBikes_.gov.psipint",
+    "username": "jsmit.persec@va.gov.psipint",
     "active": true,
-    "email_address": "christopher.zsebehazy@eBikes_.gov",
+    "email_address": "christopher.zsebehazy@va.gov",
     "firstname": "Joe",
     "lastname": "Smith PERSEC",
-    "profilename": "eBikes_VET Base Platform",
+    "profilename": "vaVET Base Platform",
     "permset_api_names": [
       "PSIP_PERSEC_Management"
     ],
@@ -57,12 +57,12 @@
     "login_url": ""
   },
   {
-    "username": "proth.readonly@eBikes_.gov.psipint",
+    "username": "proth.readonly@va.gov.psipint",
     "active": true,
-    "email_address": "christopher.zsebehazy@eBikes_.gov",
+    "email_address": "christopher.zsebehazy@va.gov",
     "firstname": "Phyllis",
     "lastname": "Roth RO",
-    "profilename": "eBikes_VET Base Platform",
+    "profilename": "vaVET Base Platform",
     "permset_api_names": [
       "PSIP_Read_Only"
     ],
@@ -73,12 +73,12 @@
     "login_url": ""
   },
   {
-    "username": "jfillmore.pss@eBikes_.gov.psipint",
+    "username": "jfillmore.pss@va.gov.psipint",
     "active": true,
-    "email_address": "christopher.zsebehazy@eBikes_.gov",
+    "email_address": "christopher.zsebehazy@va.gov",
     "firstname": "Jim",
     "lastname": "Fillmore PSS",
-    "profilename": "eBikes_VET Base Platform",
+    "profilename": "vaVET Base Platform",
     "permset_api_names": [
       "PSIP_PSS"
     ],
@@ -92,12 +92,12 @@
     "login_url": ""
   },
   {
-    "username": "d.hathaway.readonly@eBikes_.gov.psipint",
+    "username": "d.hathaway.readonly@va.gov.psipint",
     "active": true,
-    "email_address": "christopher.zsebehazy@eBikes_.gov",
+    "email_address": "christopher.zsebehazy@va.gov",
     "firstname": "Donny",
     "lastname": "Hathaway RO",
-    "profilename": "eBikes_VET Base Platform",
+    "profilename": "vaVET Base Platform",
     "permset_api_names": [
       "PSIP_Read_Only"
     ],
@@ -109,12 +109,12 @@
     "login_url": ""
   },
   {
-    "username": "lfiest.cor@eBikes_.gov.psipint",
+    "username": "lfiest.cor@va.gov.psipint",
     "active": true,
-    "email_address": "christopher.zsebehazy@eBikes_.gov",
+    "email_address": "christopher.zsebehazy@va.gov",
     "firstname": "Leslie",
     "lastname": "Fiest COR",
-    "profilename": "eBikes_VET Base Platform",
+    "profilename": "vaVET Base Platform",
     "permset_api_names": [
       "PSIP_COR"
     ],
@@ -127,12 +127,12 @@
     "login_url": ""
   },
   {
-    "username": "dsuzu.cor@eBikes_.gov.psipint",
+    "username": "dsuzu.cor@va.gov.psipint",
     "active": true,
-    "email_address": "christopher.zsebehazy@eBikes_.gov",
+    "email_address": "christopher.zsebehazy@va.gov",
     "firstname": "Damo",
     "lastname": "Suzuki COR",
-    "profilename": "eBikes_VET Base Platform",
+    "profilename": "vaVET Base Platform",
     "permset_api_names": [
       "PSIP_COR"
     ],

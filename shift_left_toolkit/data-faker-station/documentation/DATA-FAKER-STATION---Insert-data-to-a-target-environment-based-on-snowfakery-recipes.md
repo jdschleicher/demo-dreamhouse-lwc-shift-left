@@ -16,7 +16,7 @@
 
     Features:
     * Human readable YAML file provides definitions and direction on how to create data-sets
-    * eBikes_lues for fields can be hard-coded or faked based on use case
+    * values for fields can be hard-coded or faked based on use case
     * Quick and scalable - 1000 records generated and inserted under a minute
     * Multiple recipes and associated data-sets created at once
 
@@ -38,7 +38,7 @@ This file shares important information about where the "GENERATE RECIPES BY OBJE
 
 **OBJECT_BY_RELATIONSHIPS json file** 
 
-This file includes a breakdown key/eBikes_lue map of objects to their associated relationship details and important child and parent count information, recipe faker eBikes_lues per field, and lookup details for associated fields that are lookup types
+This file includes a breakdown key/value map of objects to their associated relationship details and important child and parent count information, recipe faker values per field, and lookup details for associated fields that are lookup types
 
 **RECIPES_BY_HIGHEST_PARENT_OBTRIARCH_TREELATIONSHIP json file** 
 
@@ -52,8 +52,8 @@ This file is generated from the details captured in the OBJECT_BY_RELATIONSHIPS 
 As long as our expected target environment as been authenticated against and an alias created for that authentication then there is little to do from there.
 
    1. Make sure all necessary software is installed on your machine: [Software Install and Pre-Steps](https://github.com/department-of-veterans-affairs/dtc-release-cicd-local/wiki/PREREQUISITES-AND-SETUP-TO-RUN-DATA-FAKER-STATION-FUNCTIONALITY)
-   1. Ensure the **[cicd_local](https://github.com/department-of-veterans-affairs/eBikes_-salesforce-dojo/tree/master/cicd_local)** directory from this repository is copied into the project we are working out of. 
-   1. Ensure the **cicd_local/data-faker-station/config-data-seeding.json** file has the expected eBikes_lues for each json parameter. There is an option to re-use created data-sets as each "apply-data-config" run to perform data seeding creates a timestamped directory. If we want to re-use a specific directory to align with a specific user story or scenario, we can set the parameter **"use_existing"** to "true" and update the **"reuse_datetime_stamp"** to reflect the timestamped-directory that has the data-set we want to leverage.
+   1. Ensure the **[cicd_local](https://github.com/department-of-veterans-affairs/va-salesforce-dojo/tree/master/cicd_local)** directory from this repository is copied into the project we are working out of. 
+   1. Ensure the **cicd_local/data-faker-station/config-data-seeding.json** file has the expected values for each json parameter. There is an option to re-use created data-sets as each "apply-data-config" run to perform data seeding creates a timestamped directory. If we want to re-use a specific directory to align with a specific user story or scenario, we can set the parameter **"use_existing"** to "true" and update the **"reuse_datetime_stamp"** to reflect the timestamped-directory that has the data-set we want to leverage.
 
      An example of what the "config-data-seeding.json" is below:
 ```yaml
@@ -68,7 +68,7 @@ As long as our expected target environment as been authenticated against and an 
 
    4. Ensure we are running the powershell script from the root of our project.
    5. Ensure that the running user has Permission Sets Groups assigned to them to provide access to the objects in the data plan.
-   6. If we need a recipe to start we can leverage the **Command Palette** by pressing the keyboard shortcut "ctrl + shift + P" or "command + shift + P" on a MAC and began typing into the input box "**Tasks: Run Task**". The dropdown/picklist will quickly search and filter up potential matches. We can use the down arrow to quickly go to the selection "Tasks: Run Task" the moment it shows up in the filter results. After that it will show up at the top of the filtered search items as recently used. Next we search for the built in task "GENERATE RECIPES BY OBJECTS DIRECTORY" form the .vscode/tasks.json file found in this eBikes_-salesforce-dojo repository.
+   6. If we need a recipe to start we can leverage the **Command Palette** by pressing the keyboard shortcut "ctrl + shift + P" or "command + shift + P" on a MAC and began typing into the input box "**Tasks: Run Task**". The dropdown/picklist will quickly search and filter up potential matches. We can use the down arrow to quickly go to the selection "Tasks: Run Task" the moment it shows up in the filter results. After that it will show up at the top of the filtered search items as recently used. Next we search for the built in task "GENERATE RECIPES BY OBJECTS DIRECTORY" form the .vscode/tasks.json file found in this va-salesforce-dojo repository.
 
         * The way the functionality works with "GENERATE RECIPES BY OBJECTS DIRECTORY" is that it leverages the config-data-seeding.json file listed above and the json property "path_to_objects_directory". Once that directory is set we the functionality will run as expected and create new recipe files based on the different object tree relationships in a timestamped directory under   
 

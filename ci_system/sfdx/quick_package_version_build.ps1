@@ -3,15 +3,6 @@ param(
     $devhub_alias
 )
 
-Write-host "devhub: $($devhub_alias.length)"
-Write-host "package_name: $($package_name.length)"
-
-$devhub_alias = $devhub_alias.trim()
-$package_name = $package_name.trim()
-
-Write-host "devhub: $($devhub_alias.length)"
-Write-host "package_name: $($package_name.length)"
-
 Write-Host "sfdx force:package:version:create --targetdevhubusername $devhub_alias --package $package_name --skipvalidation --installationkeybypass --wait 10 --json"
 $result_json = $(sfdx force:package:version:create --targetdevhubusername $devhub_alias --package $package_name --installationkeybypass --skipvalidation --wait 10 --json)
 
