@@ -1,9 +1,9 @@
 [
   {
     "customer_persona": "Broker_Manager",
-    "id": "",
+    "id": "0053R000002Gv6eQAC",
     "role_api_name": "",
-    "username": "mike_dreamhouse@user.com",
+    "username": "mike_dreamhouse@user.com.___businessagility1029deved___",
     "active": true,
     "email_address": "jonathon.schleicher@octo.us",
     "firstname": "Mike",
@@ -12,16 +12,15 @@
     "permset_api_names": [
       "dreamhouse"
     ],
-    "group_api_names": [
-    ],
+    "group_api_names": [],
     "queue_api_names": [],
-    "login_url": ""
+    "login_url": "https://business-agility-1029-dev-ed.my.salesforce.com?un=mike_dreamhouse@user.com.___businessagility1029deved___&pw=06052023inQESkMcaRyi"
   },
   {
     "customer_persona": "Property_Owner",
-    "id": "",
+    "id": "0053R000002Gv6fQAC",
     "role_api_name": "",
-    "username": "julie_owner@customer.com",
+    "username": "julie_owner@customer.com.___businessagility1029deved___",
     "active": true,
     "email_address": "jdschleicher@gmail.com",
     "firstname": "Julie",
@@ -30,9 +29,8 @@
     "permset_api_names": [
       "dreamhouse"
     ],
-    "group_api_names": [
-    ],
+    "group_api_names": [],
     "queue_api_names": [],
-    "login_url": ""
+    "login_url": "https://business-agility-1029-dev-ed.my.salesforce.com?un=julie_owner@customer.com.___businessagility1029deved___&pw=06052023NemgUNl8PEW"
   }
 ]
